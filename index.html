@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RoomPilot landing</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#0F7A4F}a:hover{color:#0B5D3B}
+.lp-wrap{max-width:1120px;margin:0 auto;padding-left:32px;padding-right:32px;box-sizing:border-box}
+.lp-sec{padding-top:120px;padding-bottom:120px}
+@keyframes lpFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.lp-float{animation:lpFloat 5s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.lp-float{animation:none}}
+@media (max-width: 1024px){
+ .lp-nav{display:none!important}
+ .lp-herosec{min-height:0!important;display:block!important}
+ .lp-hero{grid-template-columns:1fr!important;gap:48px!important}
+ .lp-hero-l{align-items:center!important;text-align:center}
+ .lp-split{grid-template-columns:1fr!important;gap:48px!important}
+ .lp-how{grid-template-columns:1fr!important}
+ .lp-phone{transform:scale(0.8);transform-origin:top right}
+ .lp-foot{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width: 860px){
+ .lp-grid3{grid-template-columns:1fr!important}
+ .lp-phone{display:none}
+ .lp-shot{padding-bottom:48px!important}
+}
+@media (max-width: 600px){
+ .lp-wrap{padding-left:16px!important;padding-right:16px!important}
+ .lp-sec{padding-top:72px!important;padding-bottom:72px!important}
+ .lp-hero{padding-top:48px!important;padding-bottom:56px!important}
+ .lp-shot{padding-right:0!important}
+ .lp-h1{font-size:36px!important;white-space:normal!important}
+ .lp-h2{font-size:30px!important}
+ .lp-hide-s{display:none!important}
+ .lp-btns{flex-direction:column;align-self:stretch}
+ .lp-btns > *{justify-content:center}
+ .lp-cta{padding:48px 20px!important}
+ .lp-foot{grid-template-columns:1fr!important}
+ .lp-2col{grid-template-columns:1fr!important}
+ .lp-tabs{display:flex!important;width:100%;overflow-x:auto;box-sizing:border-box}
+ .lp-tabs button{flex:none}
+ .rp-kpi4{grid-template-columns:1fr 1fr!important}
+ .rp-rooms{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ button{white-space:nowrap}
+}
+</style>
+</helmet>
+<div style="position: relative; background: #FFFFFF; font-family: 'Kantumruy Pro', system-ui, sans-serif; color: #15201B; font-variant-numeric: tabular-nums">
+
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid #EDF1EE">
+<div class="lp-wrap lp-hdr" style="height: 68px; display: flex; align-items: center; gap: 40px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #15201B"><span style="width: 32px; height: 32px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 18px; letter-spacing: -0.01em">RoomPilot</b></a>
+<nav class="lp-nav" aria-label="Sections" style="display: flex; gap: 30px; font-size: 15px">
+<sc-for list="{{navLinks}}" as="l" hint-placeholder-count="4"><a href="{{l.href}}" style="color: #4A5650; text-decoration: none">{{l.l}}</a></sc-for>
+</nav>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 16px">
+<div role="group" aria-label="Language" style="display: flex; padding: 3px; border-radius: 9px; background: #F1F5F2"><button aria-pressed="{{enSel}}" onClick="{{pickEn}}" style="min-height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: {{enBg}}; font: inherit; font-size: 13px; font-weight: 600; color: #15201B">EN</button><button aria-pressed="{{kmSel}}" onClick="{{pickKm}}" style="min-height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: {{kmBg}}; font: inherit; font-size: 13px; font-weight: 600; color: #15201B">ខ្មែរ</button></div>
+<a class="lp-hide-s" href="SignIn.dc.html" style="font-size: 15px; font-weight: 600; color: #15201B; text-decoration: none">{{t.signIn}}</a>
+<button class="lp-hide-s" onClick="{{openDemo}}" style="min-height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: #15201B; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 700">{{t.book}}</button>
+</div>
+</div>
+</header>
+
+<section id="top" class="lp-herosec" style="background: radial-gradient(90% 80% at 85% 20%, #E4F3EA 0%, #F6FBF8 45%, #FFFFFF 75%); overflow: hidden; min-height: clamp(640px, calc(100vh - 68px), 860px); display: flex; align-items: center">
+<div class="lp-wrap lp-hero" style="width: 100%; padding-top: 64px; padding-bottom: 88px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center">
+<div class="lp-hero-l" style="display: flex; flex-direction: column; align-items: flex-start; gap: 24px">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding: 5px 12px 5px 6px; border-radius: 20px; background: #FFFFFF; border: 1px solid #D9E8DF; color: #0B5D3B"><span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #0F7A4F; color: #FFFFFF">{{t.badge}}</span>{{t.eyebrow}}</span>
+<h1 class="lp-h1" style="margin: 0; font-size: 50px; line-height: 1.08; white-space: nowrap; font-weight: 700; letter-spacing: -0.04em">{{t.h1a}}<br><span style="color: #0F7A4F">{{t.h1b}}</span></h1>
+<p style="margin: 0; max-width: 500px; font-size: 18px; line-height: 1.65; color: #4A5650">{{t.lead}}</p>
+<div class="lp-btns" style="display: flex; gap: 12px; margin-top: 6px">
+<button onClick="{{openDemo}}" style="min-height: 54px; padding: 0 28px; border: 0; border-radius: 14px; background: #0F7A4F; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 700; box-shadow: 0 10px 24px rgba(15, 122, 79, 0.28)">{{t.book}}</button>
+<a href="PublicListing.dc.html" style="min-height: 54px; padding: 0 24px; border-radius: 14px; border: 1px solid #CFDDD5; background: #FFFFFF; color: #15201B; text-decoration: none; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10.5 17a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM15.5 15.5L21 21"></path></svg>{{t.rentCta}}</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: #6B7770">
+<sc-for list="{{ticks}}" as="h" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 6px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#0F7A4F" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5l3 3L13 4.5"></path></svg>{{h.l}}</span></sc-for>
+</div>
+</div>
+<div class="lp-shot" style="position: relative; padding-right: 40px">
+<div style="width: 100%; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE7E1; box-shadow: 0 40px 80px rgba(16, 48, 32, 0.14); overflow: hidden">
+<div style="display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; background: #F6F8F7; border-bottom: 1px solid #E6ECE8"><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="margin: 0 auto; padding: 3px 14px; border-radius: 7px; background: #FFFFFF; font-size: 11px; color: #8A938E">app.roompilot.com</span></div>
+<div style="display: flex; background: #F6F8F7; text-align: left">
+<div style="flex: none; width: 52px; background: #0B4F38; padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<span style="width: 30px; height: 30px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span>
+<sc-for list="{{dashNav}}" as="n" hint-placeholder-count="5"><span style="width: 32px; height: 32px; border-radius: 9px; background: {{n.bg}}; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{n.c}}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.path}}"></path></svg></span></sc-for>
+</div>
+<div style="flex: 1; min-width: 0; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 10px"><div style="flex: 1; min-width: 0"><div style="font-size: 11px; color: #6B7770">{{t.dDate}}</div><b style="font-size: 17px; letter-spacing: -0.01em">{{t.dHello}}</b></div><span style="font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 9px; background: #FFFFFF; border: 1px solid #E2E8E4; white-space: nowrap">{{t.dAll}} ▾</span><span style="font-size: 11px; font-weight: 700; padding: 7px 11px; border-radius: 9px; background: #0F7A4F; color: #FFFFFF; white-space: nowrap">{{t.dRun}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{dashKpi}}" as="k" hint-placeholder-count="4"><div style="padding: 10px 11px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E8EEEA"><div style="font-size: 10px; color: #6B7770; white-space: nowrap">{{k.l}}</div><b style="display: block; font-size: 18px; letter-spacing: -0.02em; color: {{k.c}}">{{k.v}}</b><span style="font-size: 10px; font-weight: 600; color: {{k.dc}}">{{k.d}}</span></div></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 10px">
+<div style="padding: 12px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E8EEEA; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline"><b style="font-size: 12px">{{t.dIncome}}</b><span style="margin-left: auto; font-size: 10px; color: #6B7770">{{t.dSixMo}}</span></div>
+<div style="height: 112px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; align-items: end; padding-top: 4px">
+<sc-for list="{{dashBars}}" as="b" hint-placeholder-count="6"><div style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end"><span style="font-size: 9px; font-weight: 600; color: #4A5650">{{b.v}}</span><span style="width: 100%; height: {{b.h}}; border-radius: 5px 5px 2px 2px; background: {{b.c}}"></span><span style="font-size: 9px; color: #8A938E">{{b.m}}</span></div></sc-for>
+</div>
+</div>
+<div style="padding: 12px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E8EEEA; display: flex; flex-direction: column; gap: 8px">
+<b style="font-size: 12px">{{t.dAttn}}</b>
+<sc-for list="{{dashAttn}}" as="a" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 8px"><span style="flex: none; width: 8px; height: 8px; border-radius: 4px; background: {{a.c}}"></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3"><span style="font-size: 11px; font-weight: 600">{{a.t}}</span><span style="font-size: 10px; color: #6B7770">{{a.d}}</span></span></div></sc-for>
+</div>
+</div>
+<div style="padding: 4px 12px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E8EEEA">
+<sc-for list="{{dashInv}}" as="r" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: {{r.bb}}; font-size: 11px"><b style="font-family: 'IBM Plex Mono', monospace; width: 44px">{{r.room}}</b><span style="flex: 1; min-width: 0; color: #4A5650">{{r.who}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600">{{r.amt}}</span><span style="width: 64px; text-align: center; font-size: 9px; font-weight: 700; padding: 3px 0; border-radius: 6px; background: {{r.bg}}; color: {{r.fg}}">{{r.st}}</span></div></sc-for>
+</div>
+</div>
+</div>
+</div>
+<div class="lp-phone lp-float" aria-hidden="true" style="position: absolute; right: -36px; top: 96px; z-index: 2; transform: scale(0.62); transform-origin: top right; filter: drop-shadow(0 30px 40px rgba(16, 48, 32, 0.28))">
+<div style="position: relative; width: 252px; height: 524px; box-sizing: border-box; border-radius: 40px; background: #15201B; padding: 9px; box-shadow: 0 28px 60px rgba(16, 48, 32, 0.28); z-index: 1">
+<div style="width: 234px; height: 506px; border-radius: 32px; overflow: hidden; position: relative">
+<div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.6); transform-origin: 0 0; box-sizing: border-box; background: #F3F6F4; color: #15201B; display: flex; flex-direction: column; overflow: hidden">
+<div style="flex: 1; min-height: 0; overflow: hidden; padding: 30px 20px 16px; display: flex; flex-direction: column; gap: 14px">
+<div style="flex: none; display: flex; align-items: center; gap: 12px">
+<div style="flex: 1"><div style="font-size: 13px; color: #5B616B">{{t.tnRoom}}</div><div style="font-size: 25px; font-weight: 700; letter-spacing: -0.02em">{{t.tnHi}}</div></div>
+<span style="position: relative; width: 44px; height: 44px; border: 1px solid #E2E8E4; border-radius: 22px; background: #FFFFFF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#15201B" stroke-width="1.7"><path d="M4.5 12.5V8a4.5 4.5 0 019 0v4.5l1.5 1.5h-12z"></path><path d="M7.5 15.5h3"></path></svg><span style="position: absolute; right: 9px; top: 9px; width: 8px; height: 8px; border-radius: 4px; background: #C2410C"></span></span>
+<span style="width: 44px; height: 44px; border-radius: 22px; background: #DCEFE5; color: #0F7A4F; display: grid; place-items: center; font-size: 15px; font-weight: 700">CS</span>
+</div>
+<div style="flex: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #E8EDEA; border-radius: 14px; font-size: 14px">
+<span style="min-height: 40px; border-radius: 11px; background: #FFFFFF; font-weight: 700; display: grid; place-items: center">{{t.tnOverview}}</span><span style="min-height: 40px; color: #3D4249; font-weight: 600; display: grid; place-items: center">{{t.tnBills}}</span><span style="min-height: 40px; color: #3D4249; font-weight: 600; display: grid; place-items: center">{{t.tnServices}}</span>
+</div>
+<div style="flex: none; background: #0D4A35; color: #FFFFFF; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="flex: none; width: 76px; height: 76px; border-radius: 38px; background: conic-gradient(#8FDDB5 0 41%, #2C7356 41% 100%); display: grid; place-items: center"><div style="width: 58px; height: 58px; border-radius: 29px; background: #0D4A35; display: grid; place-items: center; font-size: 15px; font-weight: 700">41%</div></div>
+<div style="flex: 1"><div style="display: flex; align-items: center"><div style="font-size: 13px; color: #BFE0D0">{{t.tnLeft}}</div><span style="margin-left: auto; display: flex; padding: 2px; border-radius: 10px; background: #13704F"><span style="min-width: 32px; height: 28px; border-radius: 8px; background: #FFFFFF; color: #0D4A35; font-size: 13px; font-weight: 700; display: grid; place-items: center">$</span><span style="min-width: 32px; height: 28px; color: #BFE0D0; font-size: 13px; font-weight: 700; display: grid; place-items: center">៛</span></span></div>
+<div style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em">$144.64</div>
+<div style="font-size: 13px; color: #BFE0D0">{{t.tnDue}}</div></div>
+</div>
+<span style="min-height: 52px; border-radius: 16px; background: #FFFFFF; color: #0D4A35; font-size: 16px; font-weight: 700; display: grid; place-items: center">{{t.tnPay}}</span>
+<span style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 1px solid #3E8466; border-radius: 14px; color: #E3F1EA; font-size: 13px"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4.5 12.5V8a4.5 4.5 0 019 0v4.5l1.5 1.5h-12z"></path><path d="M7.5 15.5h3"></path></svg><span style="flex: 1">{{t.tnRemind}}</span><span style="width: 38px; height: 22px; padding: 2px; box-sizing: border-box; border-radius: 11px; background: #8FDDB5; display: flex; justify-content: flex-end"><span style="width: 18px; height: 18px; border-radius: 9px; background: #FFFFFF"></span></span></span>
+</div>
+<div style="flex: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{tnQuick}}" as="q" hint-placeholder-count="4"><span style="min-height: 74px; border-radius: 18px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 600"><span style="width: 34px; height: 34px; border-radius: 12px; background: {{q.bg}}; color: {{q.fg}}; display: grid; place-items: center; font-size: 11px; font-weight: 700">{{q.ic}}</span>{{q.l}}</span></sc-for>
+</div>
+<div style="flex: none; background: #FFFFFF; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 16px; font-weight: 700">{{t.tnUsage}}</div>
+<sc-for list="{{tnUse}}" as="u" hint-placeholder-count="2"><div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; align-items: baseline; gap: 8px; font-size: 14px"><b>{{u.k}}</b><span style="color: #5B616B; font-size: 13px">{{u.now}}</span><span style="margin-left: auto; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: {{u.chBg}}; color: {{u.chFg}}">{{u.ch}}</span></div><div style="display: flex; flex-direction: column; gap: 4px"><span style="height: 8px; border-radius: 4px; background: {{u.c}}; width: {{u.wNow}}"></span><span style="height: 8px; border-radius: 4px; background: #D5DDD8; width: {{u.wPrev}}"></span></div></div></sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E2E8E4; padding: 6px 8px 18px">
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.2 13.2L17 17"></path></svg></span>{{t.tabExplore}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 16.5s-6-3.6-6-8A3.3 3.3 0 0110 6.6a3.3 3.3 0 016 1.9c0 4.4-6 8-6 8z"></path></svg></span>{{t.tabSaved}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5h12v8H9l-3.5 3v-3H4z"></path></svg></span>{{t.tabEnq}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #0F7A4F; font-size: 12px; font-weight: 700"><span style="width: 56px; height: 30px; border-radius: 15px; background: #DCEFE5; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3.5 9L10 3.5 16.5 9v7.5h-13z"></path><path d="M8 16.5v-4h4v4"></path></svg></span>{{t.tabHome}}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="features" class="lp-sec">
+<div class="lp-wrap">
+<div style="max-width: 640px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #0F7A4F">{{t.featEyebrow}}</span>
+<h2 class="lp-h2" style="margin: 12px 0 0; font-size: 44px; line-height: 1.12; font-weight: 700; letter-spacing: -0.03em">{{t.featH}}</h2>
+<p style="margin: 16px 0 0; font-size: 18px; line-height: 1.6; color: #4A5650">{{t.featSub}}</p>
+</div>
+<div class="lp-grid3" style="margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 48px">
+<sc-for list="{{feats}}" as="f" hint-placeholder-count="6"><div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #E6ECE8">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: #EAF5EF; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{f.path}}"></path></svg></span>
+<b style="font-size: 18px; letter-spacing: -0.01em">{{f.t}}</b>
+<span style="font-size: 15px; line-height: 1.6; color: #5E6A64">{{f.d}}</span>
+</div></sc-for>
+</div>
+</div>
+</section>
+
+<section id="how" class="lp-sec" aria-labelledby="hw" style="background: #F6F8F7">
+<div class="lp-wrap">
+<div style="display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap">
+<div style="flex: 1; min-width: 260px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: #0F7A4F">{{t.howEyebrow}}</span>
+<h2 id="hw" class="lp-h2" style="margin: 10px 0 0; font-size: 44px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em">{{t.howH}}</h2></div>
+<div class="lp-tabs" role="tablist" aria-label="Choose a flow" style="display: inline-flex; gap: 4px; padding: 5px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E2EAE5">
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="4"><button role="tab" aria-selected="{{r.sel}}" onClick="{{r.pick}}" style="min-height: 42px; padding: 0 18px; border: 0; border-radius: 10px; background: {{r.bg}}; color: {{r.fg}}; font: inherit; font-size: 15px; font-weight: 600">{{r.l}}</button></sc-for>
+</div>
+</div>
+<div class="lp-how" style="margin-top: 40px; display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 32px; align-items: stretch">
+<ol aria-label="Steps" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{flow}}" as="f" hint-placeholder-count="5">
+<li><button onClick="{{f.pick}}" aria-pressed="{{f.sel}}" style="width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; border: 1px solid {{f.bd}}; background: {{f.bg}}; font: inherit; text-align: left; color: #15201B; box-shadow: {{f.sh}}">
+<span style="flex: none; width: 32px; height: 32px; border-radius: 16px; background: {{f.nbg}}; color: {{f.nfg}}; display: grid; place-items: center; font-size: 14px; font-weight: 700">{{f.n}}</span>
+<span style="flex: 1"><b style="display: block; font-size: 16px">{{f.t}}</b><span style="font-size: 13px; color: #6B7770">{{f.when}}</span></span>
+</button></li>
+</sc-for>
+</ol>
+<article style="display: flex; flex-direction: column; gap: 16px; padding: 32px; border-radius: 24px; background: #FFFFFF; border: 1px solid #E2EAE5">
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 46px; height: 46px; border-radius: 14px; background: #DCEFE5; display: grid; place-items: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{fc.path}}"></path></svg></span><span style="font-size: 13px; color: #6B7770">{{stepOf}}</span></div>
+<h3 style="margin: 0; font-size: 26px; line-height: 1.25; letter-spacing: -0.015em">{{fc.h}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #4A5650">{{fc.d}}</p>
+<ul aria-label="Example" style="list-style: none; margin: 4px 0 0; padding: 0">
+<sc-for list="{{fc.vis}}" as="v" hint-placeholder-count="3"><li style="display: flex; align-items: center; gap: 10px; padding: 12px 0; border-top: 1px solid #EEF2EF; font-size: 15px"><span style="flex: 1">{{v.l}}</span><b style="font-size: 14px; color: {{v.c}}">{{v.s}}</b></li></sc-for>
+</ul>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 10px">
+<button onClick="{{prevStep}}" aria-label="{{t.prev}}" style="width: 44px; height: 44px; border: 1px solid #D5DDD8; border-radius: 22px; background: #FFFFFF; font: inherit; font-size: 16px">←</button>
+<button onClick="{{nextStep}}" style="min-height: 44px; padding: 0 20px; border: 0; border-radius: 22px; background: #0F7A4F; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 700">{{nextLabel}}</button>
+<a href="{{fc.href}}" style="margin-left: auto; font-size: 14px; font-weight: 700">{{t.openDemo}} →</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="renters" class="lp-sec">
+<div class="lp-wrap lp-split" style="display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 80px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #0F7A4F">{{t.rentEyebrow}}</span>
+<h2 class="lp-h2" style="margin: 0; font-size: 44px; line-height: 1.12; font-weight: 700; letter-spacing: -0.03em">{{t.rentH}}</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5650">{{t.rentSub}}</p>
+<ul style="list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{rentPoints}}" as="x" hint-placeholder-count="4"><li style="display: flex; gap: 14px; align-items: flex-start"><span style="flex: none; width: 36px; height: 36px; border-radius: 10px; background: #EAF5EF; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{x.path}}"></path></svg></span><span><b style="display: block; font-size: 16px">{{x.t}}</b><span style="font-size: 14px; line-height: 1.5; color: #5E6A64">{{x.d}}</span></span></li></sc-for>
+</ul>
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 6px"><a href="PublicListing.dc.html" style="min-height: 50px; padding: 0 22px; border-radius: 13px; background: #15201B; color: #FFFFFF; text-decoration: none; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px">{{t.rentCta}} →</a><span style="font-size: 13px; color: #6B7770">{{t.rentNote}}</span></div>
+</div>
+<div aria-hidden="true" style="position: relative; height: 600px; border-radius: 28px; background: radial-gradient(circle at 50% 50%, #E4F3EA 0%, #F6FBF8 55%, #FFFFFF 75%); display: grid; place-items: center; overflow: hidden">
+<div style="width: 262px; height: 546px; box-sizing: border-box; border-radius: 40px; background: #15201B; padding: 9px; box-shadow: 0 24px 50px rgba(16, 48, 32, 0.25)">
+<div style="width: 244px; height: 528px; border-radius: 32px; overflow: hidden; position: relative">
+<div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.6256); transform-origin: 0 0; box-sizing: border-box; background: #F3F6F4; color: #15201B; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 30px 20px 12px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: flex-start; gap: 12px">
+<div style="flex: 1">
+<div style="display: flex; align-items: center; gap: 4px; font-size: 13px; color: #5B616B"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 14s5-4.5 5-8.2A5 5 0 003 5.8C3 9.5 8 14 8 14z"></path><circle cx="8" cy="6" r="1.8"></circle></svg>{{t.pp}}</div>
+<div style="margin: 2px 0 0; font-size: 27px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">{{t.findNext}}</div>
+</div>
+<span style="display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border: 1px solid #E2E8E4; border-radius: 22px; background: #FFFFFF; font-size: 13px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>{{t.langCode}}</span>
+</div>
+<div style="display: flex; gap: 8px">
+<span style="flex: 1; display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E2E8E4; font-size: 15px; color: #8A938E; white-space: nowrap; overflow: hidden"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#5B616B" stroke-width="1.8" style="flex: none"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.2 13.2L17 17"></path></svg>{{t.searchMock}}</span>
+<span style="flex: none; width: 52px; height: 52px; border-radius: 16px; background: #0D4A35; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FFFFFF" stroke-width="1.8"><path d="M3 6h9M15 6h2M3 14h3M9 14h8"></path><circle cx="13.5" cy="6" r="1.8"></circle><circle cx="7.5" cy="14" r="1.8"></circle></svg></span>
+</div>
+<div style="display: flex; gap: 8px; margin-right: -20px; overflow: hidden">
+<sc-for list="{{phoneChips}}" as="c" hint-placeholder-count="5"><span style="flex: none; height: 38px; padding: 0 14px; border-radius: 19px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 14px; font-weight: 600; display: flex; align-items: center; white-space: nowrap">{{c.l}}</span></sc-for>
+</div>
+</div>
+<div style="flex: 1; min-height: 0; overflow: hidden; padding: 4px 20px 16px; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{phoneProps}}" as="p" hint-placeholder-count="2">
+<div style="flex: none; background: #FFFFFF; border-radius: 22px; overflow: hidden; box-shadow: 0 1px 2px rgba(21, 23, 27, 0.06), 0 6px 20px rgba(21, 23, 27, 0.05)">
+<div style="position: relative; height: 140px; background: {{p.sky}}">
+<svg width="350" height="140" viewBox="0 0 390 140" style="display: block"><rect x="40" y="26" width="140" height="114" rx="4" fill="#FFFFFF" opacity="0.8"></rect><rect x="196" y="56" width="110" height="84" rx="4" fill="#FFFFFF" opacity="0.65"></rect><g fill="{{p.sky}}"><rect x="58" y="44" width="22" height="18" rx="2"></rect><rect x="98" y="44" width="22" height="18" rx="2"></rect><rect x="138" y="44" width="22" height="18" rx="2"></rect><rect x="58" y="80" width="22" height="18" rx="2"></rect><rect x="98" y="80" width="22" height="18" rx="2"></rect><rect x="138" y="80" width="22" height="18" rx="2"></rect><rect x="214" y="74" width="22" height="18" rx="2"></rect><rect x="254" y="74" width="22" height="18" rx="2"></rect></g></svg>
+<span style="position: absolute; left: 12px; top: 12px; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 12px; background: #FFFFFF; color: #1C7A43">{{p.avail}}</span>
+<span style="position: absolute; right: 12px; bottom: 10px; font-size: 11px; color: #3D4249; background: rgba(255, 255, 255, 0.85); padding: 2px 8px; border-radius: 8px">{{t.photo}}</span>
+</div>
+<div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; gap: 8px"><b style="font-size: 19px">{{p.name}}</b><span style="margin-left: auto; font-size: 13px; color: #5B616B">{{t.from}}</span><b style="font-size: 18px">{{p.from}}</b></div>
+<div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: #3D4249"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 14s5-4.5 5-8.2A5 5 0 003 5.8C3 9.5 8 14 8 14z"></path><circle cx="8" cy="6" r="1.8"></circle></svg>{{p.area}}</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{p.tags}}" as="g" hint-placeholder-count="3"><span style="font-size: 13px; padding: 4px 10px; border-radius: 10px; background: #F3F6F4; color: #3D4249">{{g.l}}</span></sc-for></div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E2E8E4; padding: 6px 8px 18px">
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #0F7A4F; font-size: 12px; font-weight: 700"><span style="width: 56px; height: 30px; border-radius: 15px; background: #DCEFE5; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.2 13.2L17 17"></path></svg></span>{{t.tabExplore}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 16.5s-6-3.6-6-8A3.3 3.3 0 0110 6.6a3.3 3.3 0 016 1.9c0 4.4-6 8-6 8z"></path></svg></span>{{t.tabSaved}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5h12v8H9l-3.5 3v-3H4z"></path></svg></span>{{t.tabEnq}}</span>
+<span style="min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #3D4249; font-size: 12px; font-weight: 500"><span style="width: 56px; height: 30px; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 9L10 3.5 16.5 9v7.5h-13z"></path><path d="M8 16.5v-4h4v4"></path></svg></span>{{t.tabHome}}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="pricing" aria-labelledby="pr" style="background: #F6F8F7">
+<div class="lp-wrap lp-sec">
+<div style="text-align: center"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: #0F7A4F">{{t.priceEyebrow}}</span>
+<h2 id="pr" class="lp-h2" style="margin: 10px 0 0; font-size: 44px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em">{{t.priceH}}</h2>
+<div role="group" aria-label="Billing period" style="margin-top: 22px; display: inline-flex; padding: 4px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E2EAE5"><sc-for list="{{periods}}" as="p" hint-placeholder-count="2"><button aria-pressed="{{p.sel}}" onClick="{{p.pick}}" style="min-height: 38px; padding: 0 16px; border: 0; border-radius: 9px; background: {{p.bg}}; color: {{p.fg}}; font: inherit; font-size: 14px; font-weight: 600">{{p.l}}</button></sc-for></div></div>
+<div class="lp-grid3" style="margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch">
+<sc-for list="{{plans}}" as="p" hint-placeholder-count="3">
+<article style="position: relative; display: flex; flex-direction: column; gap: 18px; padding: 30px; border-radius: 24px; background: {{p.bg}}; color: {{p.fg}}; border: 1px solid {{p.bd}}">
+<div style="display: flex; align-items: center"><b style="font-size: 18px">{{p.n}}</b><sc-if value="{{p.pop}}" hint-placeholder-val="{{ false }}"><span style="margin-left: auto; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 10px; background: #8FDDB5; color: #0B4F38">{{t.popular}}</span></sc-if></div>
+<div><span style="font-size: 44px; font-weight: 700; letter-spacing: -0.03em">{{p.price}}</span><span style="font-size: 14px; color: {{p.sub}}"> {{p.unit}}</span></div>
+<span style="font-size: 15px; color: {{p.sub}}">{{p.d}}</span>
+<ul style="list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid {{p.line}}; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+<sc-for list="{{p.pts}}" as="x" hint-placeholder-count="4"><li style="display: flex; gap: 10px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="{{p.check}}" stroke-width="2.2" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M3 8.5l3 3L13 4.5"></path></svg>{{x.l}}</li></sc-for>
+</ul>
+<button onClick="{{openDemo}}" style="margin-top: auto; min-height: 50px; border-radius: 13px; border: 1px solid {{p.cbd}}; background: {{p.cbg}}; color: {{p.cfg}}; font: inherit; font-size: 15px; font-weight: 700">{{p.cta}}</button>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="faq" class="lp-sec lp-wrap" aria-labelledby="fq" style="max-width: 780px; margin: 0 auto; padding-left: 32px; padding-right: 32px">
+<h2 id="fq" class="lp-h2" style="margin: 0 0 28px; font-size: 44px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em; text-align: center">{{t.faqH}}</h2>
+<div style="border-top: 1px solid #E2EAE5">
+<sc-for list="{{faq}}" as="f" hint-placeholder-count="5">
+<div style="border-bottom: 1px solid #E2EAE5">
+<button aria-expanded="{{f.open}}" onClick="{{f.toggle}}" style="width: 100%; display: flex; align-items: center; gap: 16px; min-height: 68px; padding: 0 4px; border: 0; background: transparent; font: inherit; font-size: 17px; font-weight: 600; text-align: left; color: #15201B"><span style="flex: 1">{{f.q}}</span><span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 15px; background: #F1F5F2; display: grid; place-items: center; font-size: 18px; color: #0F7A4F">{{f.sign}}</span></button>
+<sc-if value="{{f.isOpen}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 0 50px 22px 4px; font-size: 16px; line-height: 1.65; color: #4A5650">{{f.a}}</p></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section class="lp-sec" style="padding-top: 0">
+<div class="lp-wrap">
+<div class="lp-cta" style="position: relative; overflow: hidden; border-radius: 28px; background: #0B4F38; color: #FFFFFF; padding: 72px 48px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px">
+<div aria-hidden="true" style="position: absolute; left: 50%; top: -220px; width: 640px; height: 400px; margin-left: -320px; border-radius: 50%; background: radial-gradient(closest-side, rgba(143, 221, 181, 0.28), rgba(143, 221, 181, 0))"></div>
+<h2 id="cta" class="lp-h2" style="position: relative; margin: 0; font-size: 44px; line-height: 1.12; font-weight: 700; letter-spacing: -0.03em">{{t.ctaH}}</h2>
+<p style="position: relative; margin: 0; font-size: 18px; color: #BFE0D0">{{t.ctaSub}}</p>
+<div class="lp-btns" style="position: relative; display: flex; gap: 12px; margin-top: 8px">
+<button onClick="{{openDemo}}" style="min-height: 54px; padding: 0 28px; border: 0; border-radius: 14px; background: #FFFFFF; color: #0B4F38; font: inherit; font-size: 16px; font-weight: 700">{{t.book}}</button>
+<a href="https://t.me/" style="min-height: 54px; padding: 0 24px; border-radius: 14px; border: 1px solid #3E8466; color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 600; display: grid; place-items: center">{{t.tg}}</a>
+</div>
+<p style="position: relative; margin: 8px 0 0; font-size: 14px; color: #BFE0D0">{{t.lookRoom}} <a href="PublicListing.dc.html" style="color: #FFFFFF; font-weight: 700">{{t.rentCta}} →</a></p>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #E8EEEA">
+<div class="lp-foot lp-wrap" style="padding-top: 56px; padding-bottom: 28px; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; font-size: 14px">
+<div style="display: flex; flex-direction: column; gap: 12px"><div style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 17px">RoomPilot</b></div><span style="color: #6B7770; line-height: 1.6; max-width: 280px">{{t.footAbout}}</span></div>
+<sc-for list="{{footCols}}" as="c" hint-placeholder-count="3">
+<nav aria-label="{{c.h}}" style="display: flex; flex-direction: column; gap: 10px"><b style="font-size: 13px; color: #15201B">{{c.h}}</b><sc-for list="{{c.links}}" as="l" hint-placeholder-count="3"><a href="{{l.href}}" style="color: #6B7770; text-decoration: none">{{l.l}}</a></sc-for></nav>
+</sc-for>
+</div>
+<div class="lp-wrap" style="padding-top: 18px; padding-bottom: 28px; border-top: 1px solid #EEF2EF; display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #8A938E"><span>© 2026 RoomPilot</span><span>{{t.terms}}</span><span>{{t.privacy}}</span><span style="margin-left: auto">{{t.demoData}}</span></div>
+</footer>
+
+<sc-if value="{{demoOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 20; background: rgba(12, 24, 18, 0.5); display: flex; align-items: center; justify-content: center; padding: 24px">
+<div role="dialog" aria-modal="true" aria-labelledby="bd" style="width: 100%; max-width: 500px; background: #FFFFFF; border-radius: 22px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3); overflow: hidden">
+<div style="display: flex; align-items: center; padding: 20px 24px; border-bottom: 1px solid #EEF2EF"><div style="flex: 1"><div style="font-size: 12px; color: #6B7770">{{demoStepLabel}}</div><h2 id="bd" class="rp-h2" style="margin: 2px 0 0; font-size: 21px; font-weight: 700">{{demoTitle}}</h2></div><button onClick="{{closeDemo}}" aria-label="{{t.close}}" style="width: 38px; height: 38px; border: 0; border-radius: 10px; background: #F1F5F2; display: grid; place-items: center"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="#15201B" stroke-width="2" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"></path></svg></button></div>
+<sc-if value="{{dForm}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 14px">
+<div class="lp-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">{{t.fName}}<input value="Sok Dara" style="min-height: 44px; padding: 0 12px; border: 1px solid #D5DDD8; border-radius: 10px; font: inherit; font-size: 14px"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">{{t.fPhone}}<input value="+855 12 345 678" style="min-height: 44px; padding: 0 12px; border: 1px solid #D5DDD8; border-radius: 10px; font: inherit; font-size: 14px"></label>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0"><legend style="font-size: 13px; font-weight: 600; padding-bottom: 8px">{{t.fRooms}}</legend><div style="display: flex; gap: 8px"><sc-for list="{{dRooms}}" as="o" hint-placeholder-count="4"><button aria-pressed="{{o.sel}}" onClick="{{o.pick}}" style="flex: 1; min-height: 42px; border-radius: 10px; border: 1px solid {{o.bd}}; background: {{o.bg}}; color: {{o.fg}}; font: inherit; font-size: 14px; font-weight: 600">{{o.l}}</button></sc-for></div></fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0"><legend style="font-size: 13px; font-weight: 600; padding-bottom: 8px">{{t.fTime}}</legend><div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><sc-for list="{{dSlots}}" as="o" hint-placeholder-count="3"><button aria-pressed="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 46px; border-radius: 10px; border: 1px solid {{o.bd}}; background: {{o.bg}}; color: {{o.fg}}; font: inherit; font-size: 13px; font-weight: 600">{{o.l}}</button></sc-for></div></fieldset>
+<button onClick="{{dNext}}" style="min-height: 50px; border: 0; border-radius: 12px; background: #0F7A4F; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 700">{{t.review}}</button>
+</div>
+</sc-if>
+<sc-if value="{{dConfirm}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="padding: 14px; border-radius: 12px; background: #F6F9F7; font-size: 14px; line-height: 1.7">Sok Dara · +855 12 345 678<br>{{dSummary}}</div>
+<div style="display: flex; gap: 10px"><button onClick="{{dBack}}" style="flex: 1; min-height: 48px; border: 1px solid #D5DDD8; border-radius: 12px; background: #FFFFFF; font: inherit; font-size: 15px; font-weight: 600">{{t.edit}}</button><button onClick="{{dSend}}" style="flex: 2; min-height: 48px; border: 0; border-radius: 12px; background: #0F7A4F; color: #FFFFFF; font: inherit; font-size: 15px; font-weight: 700">{{t.yesBook}}</button></div>
+</div>
+</sc-if>
+<sc-if value="{{dDone}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 30px 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<span style="width: 56px; height: 56px; border-radius: 28px; background: #DCEFE5; display: grid; place-items: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<b style="font-size: 18px">{{t.booked}} · {{dSlotSel}}</b>
+<span style="font-size: 14px; color: #4A5650">{{t.bookedSub}}</span>
+<a href="Main.dc.html" style="margin-top: 6px; min-height: 48px; padding: 0 20px; border-radius: 12px; background: #0F7A4F; color: #FFFFFF; text-decoration: none; font-size: 15px; font-weight: 700; display: grid; place-items: center">{{t.openLive}}</a>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {}, km = st.lang === 'km';
+    function L(e, k) { return km ? k : e; }
+    var T = {
+      signIn: L('Sign in', 'ចូល'), book: L('Book a demo', 'កក់ការបង្ហាញ'), tryDemo: L('Try the live demo', 'សាកល្បងផ្ទាល់'), badge: L('Cambodia', 'កម្ពុជា'), eyebrow: L('Khmer & English · Riel & USD · KHQR', 'ខ្មែរ និង English · រៀល និង ដុល្លារ · KHQR'),
+      h1a: L('Find a room. Rent it.', 'រកបន្ទប់។ ជួលបន្ទប់។'), h1b: L('Manage it in one app.', 'គ្រប់គ្រងវាក្នុងកម្មវិធីតែមួយ។'), journeyLabel: L('From exploring a room to paying rent', 'ពីការស្វែងរកបន្ទប់ ដល់ការបង់ថ្លៃជួល'),
+      lead: L('Owners fill rooms, send bills on Telegram in 10 minutes and see every KHQR payment. Renters find verified rooms and pay in two taps.', 'ម្ចាស់ផ្ទះជួលបន្ទប់ពេញ ផ្ញើវិក្កយបត្រតាម Telegram ក្នុង ១០ នាទី និងឃើញរាល់ការបង់ KHQR។ អ្នកជួលរកបន្ទប់ដែលបានផ្ទៀងផ្ទាត់ ហើយបង់ប្រាក់ដោយចុចតែពីរដង។'),
+      paidBadge: L('28 of 30 tenants paid · day 3', 'អ្នកជួល ២៨/៣០ បានបង់ · ថ្ងៃទី ៣'), forOwners: L('Room owner', 'ម្ចាស់បន្ទប់'), forRenters: L('Renter', 'អ្នកជួល'), collectedOf: L('of $10,448 collected', 'ប្រមូលបានពី $10,448'), verified: L('Verified', 'ផ្ទៀងផ្ទាត់'), roomName: L('Studio A-106', 'ស្ទូឌីយោ A-106'), roomArea: L('Toul Kork · 14 min to work', 'ទួលគោក · ១៤ នាទីទៅការងារ'), allIn: L('/mo all-in', '/ខែ សរុប'), rentLine: L('Rent $200', 'ជួល $200'), billsLine: L('Bills ~$46', 'ទឹកភ្លើង ~$46'), bookView: L('Book a free viewing', 'កក់មើលបន្ទប់ឥតគិតថ្លៃ'),
+      tnRoom: L('Room A-201 · Sokha Residence', 'បន្ទប់ A-201 · Sokha Residence'), tnHi: L('Hi, Sreymom', 'សួស្តី ស្រីមុំ'), tnOverview: L('Overview', 'ទិដ្ឋភាពទូទៅ'), tnBills: L('Bills', 'វិក្កយបត្រ'), tnServices: L('Services', 'សេវា'), tnLeft: L('Left to pay for October', 'នៅសល់ត្រូវបង់ខែតុលា'), tnDue: L('≈ ៛593,024 · due Thu 5 Nov', '≈ ៛593,024 · ផុតកំណត់ ៥ វិច្ឆិកា'), tnPay: L('Pay now', 'បង់ឥឡូវ'), tnRemind: L('Remind me on Telegram · Mon 2 Nov', 'រំលឹកតាម Telegram · ច័ន្ទ ២ វិច្ឆិកា'), tnUsage: L('Your usage vs September', 'ការប្រើប្រាស់ធៀបខែកញ្ញា'),
+      mockTitle: L('October · Sokha Residence', 'ខែតុលា · Sokha Residence'), bot: 'RoomPilot Bot', billOf: L('October bill · A-201', 'វិក្កយបត្រខែតុលា · A-201'), payKhqr: L('Pay with KHQR', 'បង់តាម KHQR'),
+      whyEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), ownNote: L('Free setup · we import your Excel', 'រៀបចំឥតគិតថ្លៃ · យើងនាំចូល Excel ជូន'), whyH: L('Manage all your rooms from one screen', 'គ្រប់គ្រងបន្ទប់ទាំងអស់ពីអេក្រង់តែមួយ'), myProps: L('My properties', 'អគាររបស់ខ្ញុំ'), ownLead: L('Whether you rent 5 rooms or 500, RoomPilot shows every property, room and payment in one place — on your phone or computer.', 'ទោះបីអ្នកជួល ៥ ឬ ៥០០ បន្ទប់ RoomPilot បង្ហាញគ្រប់អគារ បន្ទប់ និងការបង់ប្រាក់នៅកន្លែងតែមួយ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'),
+      howEyebrow: L('HOW IT WORKS', 'របៀបដំណើរការ'), howH: L('A simple flow for everyone', 'ជំហានសាមញ្ញសម្រាប់អ្នកទាំងអស់គ្នា'), openDemo: L('Open in demo', 'បើកក្នុងការបង្ហាញ'), prev: L('Previous step', 'ជំហានមុន'),
+      rentEyebrow: L('FOR RENTERS', 'សម្រាប់អ្នកជួល'), rentH: L('Explore rooms for rent. See the real price.', 'ស្វែងរកបន្ទប់ជួល។ ឃើញតម្លៃពិត។'),
+      rentSub: L('Search properties and rooms by area and budget, see what you will really pay each month, and book a free viewing in two taps.', 'ស្វែងរកអគារ និងបន្ទប់តាមតំបន់ និងថវិកា មើលតម្លៃពិតដែលត្រូវបង់ប្រចាំខែ ហើយកក់មើលបន្ទប់ឥតគិតថ្លៃត្រឹមពីរដង។'),
+      rentCta: L('Explore rooms', 'ស្វែងរកបន្ទប់'), rentNote: L('Always free for renters', 'ឥតគិតថ្លៃជានិច្ចសម្រាប់អ្នកជួល'),
+      pp: L('Phnom Penh', 'ភ្នំពេញ'), findNext: L('Find your next room', 'រកបន្ទប់ថ្មីរបស់អ្នក'), searchMock: L('Toul Kork, Chroy Changvar…', 'ទួលគោក, ជ្រោយចង្វារ…'), langCode: km ? 'ខ្មែរ' : 'EN', photo: L('Photo', 'រូបថត'), from: L('from', 'ចាប់ពី'), availNow: L('Available now', 'ទំនេរឥឡូវ'), perMo: L('/mo', '/ខែ'),
+      tabExplore: L('Explore', 'ស្វែងរក'), tabSaved: L('Saved', 'រក្សាទុក'), tabEnq: L('Enquiries', 'ការសាកសួរ'), tabHome: L('My home', 'ផ្ទះខ្ញុំ'),
+      priceEyebrow: L('PRICING', 'តម្លៃ'), priceH: L('Simple pricing, per room', 'តម្លៃសាមញ្ញ គិតតាមបន្ទប់'), popular: L('Most popular', 'ពេញនិយមបំផុត'), priceNote: L('Sample pricing for the demo — confirm before launch.', 'តម្លៃគំរូសម្រាប់ការបង្ហាញ — សូមបញ្ជាក់មុនដាក់ឱ្យប្រើ។'),
+      faqH: L('Common questions', 'សំណួរញឹកញាប់'),
+      chipBill: L('October bill sent', 'បានផ្ញើវិក្កយបត្រខែតុលា'), chipBillSub: L('Telegram · Khmer & English', 'Telegram · ខ្មែរ និង English'), chipPaid: L('$100 paid by KHQR', 'បានបង់ $100 តាម KHQR'), chipPaidSub: L('Receipt RC-1188 sent', 'បានផ្ញើបង្កាន់ដៃ RC-1188'), heroOcc: L('15 of 16 rented', 'ជួលរួច ១៥/១៦'), lgPaid: L('Paid', 'បានបង់'), lgDue: L('Due', 'ត្រូវបង់'), lgFree: L('Free', 'ទំនេរ'), heroFree: L('3 free rooms nearby', 'បន្ទប់ទំនេរ ៣ ក្បែរអ្នក'), heroFreeSub: L('Toul Kork · verified', 'ទួលគោក · បានផ្ទៀងផ្ទាត់'), dDate: L('Friday, 30 October', 'សុក្រ ៣០ តុលា'), dHello: L('Good morning, Sokha', 'អរុណសួស្តី Sokha'), dAll: L('All properties', 'អគារទាំងអស់'), dRun: L('Run billing', 'ចេញវិក្កយបត្រ'), dIncome: L('Income', 'ចំណូល'), dSixMo: L('Last 6 months', '៦ ខែចុងក្រោយ'), dAttn: L('Needs attention', 'ត្រូវយកចិត្តទុកដាក់'), ctaH: L('See RoomPilot with your own building', 'មើល RoomPilot ជាមួយអគាររបស់អ្នកផ្ទាល់'), featEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), featH: L('Everything you need to run your rooms', 'អ្វីៗទាំងអស់ដែលអ្នកត្រូវការ ដើម្បីគ្រប់គ្រងបន្ទប់ជួល'), featSub: L('From 5 rooms to 500 — on your phone or computer.', 'ពី ៥ បន្ទប់ ដល់ ៥០០ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'), billEyebrow: L('BILLING DAY', 'ថ្ងៃចេញវិក្កយបត្រ'), billH: L('Bills out in 10 minutes. Paid in days.', 'វិក្កយបត្រចេញក្នុង ១០ នាទី។ ប្រាក់ចូលក្នុងប៉ុន្មានថ្ងៃ។'), lookRoom: L('Looking for a room?', 'កំពុងរកបន្ទប់ជួលមែនទេ?'), before: L('BEFORE', 'មុន'), after: L('WITH ROOMPILOT', 'ជាមួយ ROOMPILOT'), ctaSub: L('30-minute demo · we import your rooms and tenants for free', 'ការបង្ហាញ ៣០ នាទី · យើងនាំចូលបន្ទប់ និងអ្នកជួលរបស់អ្នកដោយឥតគិតថ្លៃ'), tg: L('Chat on Telegram', 'ជជែកតាម Telegram'),
+      footAbout: L('Find, rent and manage rooms in Cambodia — for room owners, renters and tenants.', 'ស្វែងរក ជួល និងគ្រប់គ្រងបន្ទប់នៅកម្ពុជា — សម្រាប់ម្ចាស់បន្ទប់ អ្នកស្វែងរកបន្ទប់ និងអ្នកជួល។'), terms: L('Terms', 'លក្ខខណ្ឌ'), privacy: L('Privacy', 'ឯកជនភាព'), demoData: L('All names and numbers are demo data', 'ឈ្មោះ និងលេខទាំងអស់ជាទិន្នន័យសាកល្បង'),
+      fName: L('Your name', 'ឈ្មោះរបស់អ្នក'), fPhone: L('Phone / Telegram', 'ទូរស័ព្ទ / Telegram'), fRooms: L('Rooms you manage', 'ចំនួនបន្ទប់ដែលអ្នកគ្រប់គ្រង'), fTime: L('Demo time', 'ពេលវេលាបង្ហាញ'),
+      review: L('Review', 'ពិនិត្យ'), edit: L('Edit', 'កែប្រែ'), yesBook: L('Yes, book my demo', 'បាទ/ចាស កក់ការបង្ហាញ'), booked: L('Demo booked', 'បានកក់ការបង្ហាញ'),
+      bookedSub: L('We\'ll confirm on Telegram. Meanwhile, click around the live demo.', 'យើងនឹងបញ្ជាក់តាម Telegram។ ក្នុងពេលនេះ សាកល្បងការបង្ហាញផ្ទាល់សិន។'), openLive: L('Open live demo', 'បើកការបង្ហាញផ្ទាល់'), close: L('Close', 'បិទ')
+    };
+    var IC = { home: 'M3 11l9-7 9 7v9H3zM9 20v-6h6v6', rate: 'M5 19L19 5M7 9a2 2 0 100-4 2 2 0 000 4zM17 19a2 2 0 100-4 2 2 0 000 4z', bill: 'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6M9 16h3', pay: 'M12 21a9 9 0 100-18 9 9 0 000 18zM8 12.5l2.7 2.7L16 9.8', chart: 'M4 20V10M10 20V4M16 20v-7M22 20H2', search: 'M10.5 17a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM15.5 15.5L21 21', compare: 'M4 5h7v14H4zM13 5h7v14h-7z', cal: 'M4 6h16v14H4zM4 10h16M8 3v5M16 3v5', sign: 'M4 20h4l11-11-4-4L4 16zM13 7l4 4', key: 'M14 10a4 4 0 10-4-4M11.5 8.5L3 17v4h4v-2h2v-2h2l2.5-2.5', list: 'M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01', cam: 'M4 8h3l2-3h6l2 3h3v11H4zM12 16a3 3 0 100-6 3 3 0 000 6z', warn: 'M12 4l9 16H3zM12 10v4M12 17h.01', moto: 'M5 18a3 3 0 100-6 3 3 0 000 6zM19 18a3 3 0 100-6 3 3 0 000 6zM5 15h5l3-6h4l2 6', link: 'M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1', chat: 'M4 5h16v11H9l-5 4z', qr: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM18 14h2M14 18h2v2', fix: 'M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-2.5z', hist: 'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2', dollar: 'M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6', map: 'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14', shield: 'M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6zM9 12l2 2 4-4' };
+    var G = '#1C7A43', A = '#A86A00', Rd = '#B42318', Gy = '#6B7770', P = '#0F7A4F';
+    var role = st.role || 'owner';
+    var ROLES = {
+      owner: { l: L('Owner', 'ម្ចាស់ផ្ទះ'), steps: [
+        ['home', L('Add buildings & rooms', 'បញ្ចូលអគារ និងបន្ទប់'), L('Day 1', 'ថ្ងៃទី ១'), L('Add your buildings and rooms once', 'បញ្ចូលអគារ និងបន្ទប់តែម្តងគត់'), L('Type them in or send us your Excel — we import it for free. Free rooms are shown to renters automatically.', 'វាយបញ្ចូល ឬផ្ញើឯកសារ Excel មកយើង — យើងនាំចូលជូនឥតគិតថ្លៃ។ បន្ទប់ទំនេរនឹងបង្ហាញដល់អ្នកជួលដោយស្វ័យប្រវត្តិ។'), 'AllProperties.dc.html',
+          [[L('Sokha Residence · 32 rooms', 'Sokha Residence · ៣២ បន្ទប់'), L('Added', 'បានបញ្ចូល'), G], [L('Riverside Flats · 16 rooms', 'Riverside Flats · ១៦ បន្ទប់'), L('Added', 'បានបញ្ចូល'), G], [L('A-106 · free', 'A-106 · ទំនេរ'), L('Shown to renters', 'បង្ហាញដល់អ្នកជួល'), P]]],
+        ['rate', L('Set prices & rates', 'កំណត់តម្លៃ និងអត្រា'), L('Day 1', 'ថ្ងៃទី ១'), L('Set rent, utility rates and your exchange rate', 'កំណត់ថ្លៃជួល អត្រាទឹកភ្លើង និងអត្រាប្តូរប្រាក់'), L('Electricity in riel per kWh, water per m³, parking and services. Change them any time, with a confirmation first.', 'អគ្គិសនីគិតជារៀលក្នុងមួយ kWh ទឹកក្នុងមួយ m³ ចំណត និងសេវាផ្សេងៗ។ អាចកែប្រែបានគ្រប់ពេល ដោយមានការបញ្ជាក់ជាមុន។'), 'Tariffs.dc.html',
+          [[L('Electricity · ៛800 / kWh', 'អគ្គិសនី · ៛800 / kWh'), L('Set', 'បានកំណត់'), G], [L('Water · $0.60 / m³', 'ទឹក · $0.60 / m³'), L('Set', 'បានកំណត់'), G], [L('Exchange rate · ៛4,100', 'អត្រាប្តូរប្រាក់ · ៛4,100'), L('Set', 'បានកំណត់'), G]]],
+        ['bill', L('Send all bills', 'ផ្ញើវិក្កយបត្រទាំងអស់'), L('25th · 10 min', 'ថ្ងៃទី ២៥ · ១០ នាទី'), L('One click bills every room', 'ចុចម្តង ចេញវិក្កយបត្រគ្រប់បន្ទប់'), L('Readings are added to rent, parking and any unpaid amount. Check once, then send every bill in Khmer and English on Telegram.', 'លេខកុងទ័របូកជាមួយថ្លៃជួល ចំណត និងប្រាក់មិនទាន់បង់។ ពិនិត្យម្តង រួចផ្ញើវិក្កយបត្រទាំងអស់ជាភាសាខ្មែរ និងអង់គ្លេសតាម Telegram។'), 'BillingRun.dc.html',
+          [[L('46 bills calculated', 'គណនារួច ៤៦ វិក្កយបត្រ'), L('Review', 'ពិនិត្យ'), A], [L('2 readings flagged', 'លេខកុងទ័រ ២ ត្រូវពិនិត្យ'), L('Check', 'ពិនិត្យ'), Rd], [L('Sent on Telegram', 'បានផ្ញើតាម Telegram'), '46 / 46', G]]],
+        ['pay', L('See who paid', 'មើលអ្នកដែលបានបង់'), L('Automatically', 'ស្វ័យប្រវត្តិ'), L('Payments match themselves', 'ការបង់ប្រាក់ផ្គូផ្គងដោយខ្លួនឯង'), L('Every KHQR payment lands on the right bill. Record cash with a receipt. Reminders go out for you.', 'ការបង់តាម KHQR នីមួយៗចូលត្រូវវិក្កយបត្រ។ កត់ត្រាសាច់ប្រាក់ជាមួយបង្កាន់ដៃ។ ការរំលឹកត្រូវបានផ្ញើជូនអ្នក។'), 'Payments.dc.html',
+          [[L('28 of 30 paid', 'បានបង់ ២៨/៣០'), '93%', G], [L('A-201 · part paid', 'A-201 · បង់ខ្លះ'), L('$144.64 left', 'នៅសល់ $144.64'), A], [L('Reminders sent', 'បានផ្ញើការរំលឹក'), '2', P]]],
+        ['chart', L('Check reports', 'មើលរបាយការណ៍'), L('Any time', 'គ្រប់ពេល'), L('Know how your buildings are doing', 'ដឹងពីស្ថានភាពអគាររបស់អ្នក'), L('Income, unpaid bills, occupancy and utility use — by building and month. Export for your accountant.', 'ចំណូល វិក្កយបត្រមិនទាន់បង់ អត្រាជួល និងការប្រើទឹកភ្លើង — តាមអគារ និងខែ។ នាំចេញឱ្យគណនេយ្យករ។'), 'Reports.dc.html',
+          [[L('Occupancy', 'អត្រាជួល'), '94%', G], [L('Collected · October', 'ប្រមូលបាន · ខែតុលា'), '$9,412', G], [L('Still to collect', 'នៅត្រូវប្រមូល'), '$1,036', A]]] ] },
+      renter: { l: L('Renter', 'អ្នកស្វែងរកបន្ទប់'), steps: [
+        ['search', L('Explore rooms', 'ស្វែងរកបន្ទប់'), L('Any day', 'គ្រប់ថ្ងៃ'), L('Explore properties & rooms for rent', 'ស្វែងរកអគារ និងបន្ទប់ជួល'), L('Filter by area, budget and must-haves. Every room shows the real monthly total, with a map and travel time.', 'ច្រោះតាមតំបន់ ថវិកា និងតម្រូវការ។ បន្ទប់នីមួយៗបង្ហាញតម្លៃសរុបពិតប្រចាំខែ ជាមួយផែនទី និងរយៈពេលធ្វើដំណើរ។'), 'GApp1Browse.dc.html',
+          [[L('Studio A-106 · Toul Kork', 'ស្ទូឌីយោ A-106 · ទួលគោក'), L('$246 all-in', '$246 សរុប'), '#0B5D3B'], [L('1-bed R-207 · Chroy Changvar', 'បន្ទប់គេង ១ R-207 · ជ្រោយចង្វារ'), L('$276 all-in', '$276 សរុប'), '#0B5D3B'], [L('14 min to Central Market', '១៤ នាទី ទៅផ្សារធំថ្មី'), L('Map', 'ផែនទី'), '#5A4580']]],
+        ['compare', L('Save & compare', 'រក្សាទុក និងប្រៀបធៀប'), L('Any day', 'គ្រប់ថ្ងៃ'), L('Compare rooms side by side', 'ប្រៀបធៀបបន្ទប់ក្បែរគ្នា'), L('Total cost, size, deposit and travel time next to each other — the better value is highlighted.', 'តម្លៃសរុប ទំហំ ប្រាក់កក់ និងរយៈពេលធ្វើដំណើរ ដាក់ក្បែរគ្នា — ជម្រើសល្អជាងត្រូវបានរំលេច។'), 'GAppCompare.dc.html',
+          [[L('Total per month', 'សរុបប្រចាំខែ'), '$246 vs $276', G], [L('Size', 'ទំហំ'), '22 vs 34 m²', Gy], [L('Travel time', 'រយៈពេលធ្វើដំណើរ'), L('14 vs 11 min', '១៤ ទល់ ១១ នាទី'), Gy]]],
+        ['cal', L('Book a viewing', 'កក់មើលបន្ទប់'), L('2 taps', 'ចុច ២ ដង'), L('Book a free viewing', 'កក់មើលបន្ទប់ឥតគិតថ្លៃ'), L('Pick a time that suits you. The caretaker confirms on Telegram and meets you at the gate.', 'ជ្រើសម៉ោងដែលសមស្រប។ អ្នកថែទាំបញ្ជាក់តាម Telegram ហើយជួបអ្នកនៅមាត់ទ្វារ។'), 'GApp3Enquire.dc.html',
+          [[L('Sat 31 Oct · 10:00', 'សៅរ៍ ៣១ តុលា · ១០:០០'), L('Booked', 'បានកក់'), P], [L('Meet Rithy at the gate', 'ជួប Rithy នៅមាត់ទ្វារ'), L('Confirmed', 'បានបញ្ជាក់'), G], [L('Chat on Telegram', 'ជជែកតាម Telegram'), L('Open', 'បើក'), '#155E85']]],
+        ['sign', L('Accept & sign', 'យល់ព្រម និងចុះហត្ថលេខា'), L('After viewing', 'ក្រោយមើលបន្ទប់'), L('Accept the offer and sign in the app', 'យល់ព្រមលើការផ្តល់ជូន និងចុះហត្ថលេខាក្នុងកម្មវិធី'), L('See rent, deposit and move-in date clearly. Accept, sign and pay the deposit by KHQR.', 'មើលថ្លៃជួល ប្រាក់កក់ និងថ្ងៃចូលនៅយ៉ាងច្បាស់។ យល់ព្រម ចុះហត្ថលេខា និងបង់ប្រាក់កក់តាម KHQR។'), 'GAppTrack.dc.html',
+          [[L('Offer · $200 / month', 'ការផ្តល់ជូន · $200 / ខែ'), L('Accepted', 'បានយល់ព្រម'), G], [L('Contract · 12 months', 'កិច្ចសន្យា · ១២ ខែ'), L('Signed', 'បានចុះហត្ថលេខា'), G], [L('Deposit $400 · KHQR', 'ប្រាក់កក់ $400 · KHQR'), L('Paid', 'បានបង់'), G]]],
+        ['key', L('Move in', 'ចូលនៅ'), L('Move-in day', 'ថ្ងៃចូលនៅ'), L('Get your keys — no surprises', 'ទទួលកូនសោ — គ្មានការភ្ញាក់ផ្អើល'), L('A checklist for keys and the first meter readings with photos, so your first bill is fair.', 'បញ្ជីត្រួតពិនិត្យសម្រាប់កូនសោ និងលេខកុងទ័រដំបូងជាមួយរូបថត ដើម្បីឱ្យវិក្កយបត្រដំបូងត្រឹមត្រូវ។'), 'GAppMoveIn.dc.html',
+          [[L('Keys · Sun 1 Nov 9:00', 'កូនសោ · អាទិត្យ ១ វិច្ឆិកា ៩:០០'), L('Booked', 'បានកក់'), P], [L('Start: 4,210 kWh · 132 m³', 'ចាប់ផ្តើម: 4,210 kWh · 132 m³'), L('Agreed', 'បានយល់ព្រម'), G], [L('Bills on Telegram', 'វិក្កយបត្រតាម Telegram'), L('Linked', 'បានភ្ជាប់'), G]]] ] },
+      staff: { l: L('Caretaker', 'អ្នកថែទាំ'), steps: [
+        ['list', L('See today\'s tasks', 'មើលការងារថ្ងៃនេះ'), L('Reading day', 'ថ្ងៃអានកុងទ័រ'), L('Know exactly what is left', 'ដឹងច្បាស់ថានៅសល់អ្វីខ្លះ'), L('The app lists every room still to read, with the ones that need attention at the top.', 'កម្មវិធីបង្ហាញបន្ទប់ដែលនៅមិនទាន់អាន ហើយបន្ទប់ដែលត្រូវយកចិត្តទុកដាក់នៅខាងលើ។'), 'StaffHome.dc.html',
+          [[L('Readings · 28 of 30', 'ការអាន · ២៨/៣០'), L('Due today', 'ត្រូវធ្វើថ្ងៃនេះ'), A], [L('R-205 · water', 'R-205 · ទឹក'), L('Missing', 'ខ្វះ'), Rd], [L('R-106 · electricity', 'R-106 · អគ្គិសនី'), L('Re-read', 'អានឡើងវិញ'), Rd]]],
+        ['cam', L('Photo each meter', 'ថតរូបកុងទ័រនីមួយៗ'), L('~20 sec / room', '~២០ វិនាទី / បន្ទប់'), L('Snap the meter — the app reads it', 'ថតកុងទ័រ — កម្មវិធីអានលេខឱ្យ'), L('The number is read from the photo. Photo, time and reading are saved together as proof, even offline.', 'លេខត្រូវបានអានពីរូបថត។ រូបថត ពេលវេលា និងលេខ ត្រូវបានរក្សាទុកជាមួយគ្នាជាភស្តុតាង ទោះគ្មានអ៊ីនធឺណិតក៏ដោយ។'), 'StaffCapture.dc.html',
+          [['R-108 · 10,031 kWh', L('✓ Read', '✓ អានរួច'), G], ['R-103 · 214 m³', L('✓ Read', '✓ អានរួច'), G], [L('Saved offline', 'រក្សាទុកពេលគ្មានអ៊ីនធឺណិត'), L('Uploads later', 'បញ្ជូនពេលក្រោយ'), Gy]]],
+        ['warn', L('Fix flagged ones', 'កែលេខដែលមានបញ្ហា'), L('Same day', 'ថ្ងៃដដែល'), L('Odd readings are caught before billing', 'លេខមិនប្រក្រតីត្រូវរកឃើញមុនចេញវិក្កយបត្រ'), L('If a reading is lower than last month or the photo is blurry, the app asks for a re-take.', 'បើលេខទាបជាងខែមុន ឬរូបថតមិនច្បាស់ កម្មវិធីនឹងស្នើឱ្យថតម្តងទៀត។'), 'StaffCapture.dc.html',
+          [[L('R-106 · lower than last month', 'R-106 · ទាបជាងខែមុន'), L('Re-take', 'ថតម្តងទៀត'), Rd], [L('New photo', 'រូបថតថ្មី'), L('✓ Read', '✓ អានរួច'), G], [L('Sent to owner', 'ផ្ញើទៅម្ចាស់ផ្ទះ'), L('Done', 'រួចរាល់'), G]]],
+        ['moto', L('Check parking', 'ពិនិត្យចំណត'), L('Any time', 'គ្រប់ពេល'), L('Know whose vehicle it is', 'ដឹងថាយានជំនិះជារបស់អ្នកណា'), L('Type a plate to see the room, the space and whether parking is paid.', 'វាយលេខស្លាកលេខ ដើម្បីមើលបន្ទប់ កន្លែងចត និងថាបានបង់ថ្លៃចំណតឬនៅ។'), 'StaffParking.dc.html',
+          [['PP 2CE-3381', L('R-104 · paid', 'R-104 · បានបង់'), G], [L('Space RM-04', 'កន្លែង RM-04'), L('Taken', 'មានគេចត'), Gy], [L('Unknown plate', 'ស្លាកលេខមិនស្គាល់'), L('Report', 'រាយការណ៍'), Rd]]] ] },
+      tenant: { l: L('Tenant', 'អ្នកជួល'), steps: [
+        ['link', L('Link Telegram', 'ភ្ជាប់ Telegram'), L('Once', 'ម្តងគត់'), L('Connect in 30 seconds', 'ភ្ជាប់ក្នុង ៣០ វិនាទី'), L('Open the link from your landlord and confirm the last 4 digits of your phone. Done.', 'បើកតំណពីម្ចាស់ផ្ទះ ហើយបញ្ជាក់លេខ ៤ ខ្ទង់ចុងក្រោយនៃទូរស័ព្ទរបស់អ្នក។ រួចរាល់។'), 'TgLink.dc.html',
+          [[L('Room A-201 · Sokha Residence', 'បន្ទប់ A-201 · Sokha Residence'), L('Found', 'រកឃើញ'), G], [L('Phone ••• 5418', 'ទូរស័ព្ទ ••• 5418'), L('Confirmed', 'បានបញ្ជាក់'), G], [L('Language', 'ភាសា'), 'ខ្មែរ', '#155E85']]],
+        ['chat', L('Get your bill', 'ទទួលវិក្កយបត្រ'), L('25th', 'ថ្ងៃទី ២៥'), L('A clear bill, with proof', 'វិក្កយបត្រច្បាស់លាស់ មានភស្តុតាង'), L('Every fee line by line, with both meter photos. A reminder comes 3 days before it is due.', 'ថ្លៃនីមួយៗបង្ហាញម្តងមួយបន្ទាត់ ជាមួយរូបថតកុងទ័រទាំងពីរ។ ការរំលឹកមកដល់ ៣ ថ្ងៃមុនថ្ងៃផុតកំណត់។'), 'TgBill.dc.html',
+          [[L('October bill', 'វិក្កយបត្រខែតុលា'), '$244.64', '#15201B'], ['155 kWh · 9 m³', L('Photos', 'រូបថត'), '#155E85'], [L('Due Thu 5 Nov', 'ផុតកំណត់ ព្រហស្បតិ៍ ៥ វិច្ឆិកា'), L('Reminder on', 'បើកការរំលឹក'), P]]],
+        ['qr', L('Pay by KHQR', 'បង់តាម KHQR'), L('By the 5th', 'មុនថ្ងៃទី ៥'), L('Pay from any bank app', 'បង់ពីកម្មវិធីធនាគារណាមួយ'), L('Scan the KHQR on your bill. Pay in full or in part, in dollars or riel. Your receipt arrives straight away.', 'ស្កេន KHQR លើវិក្កយបត្រ។ បង់ទាំងអស់ ឬបង់ខ្លះ ជាដុល្លារ ឬរៀល។ បង្កាន់ដៃមកដល់ភ្លាមៗ។'), 'GApp8Pay.dc.html',
+          [['KHQR · ABA', '$100.00', G], [L('Left to pay', 'នៅសល់ត្រូវបង់'), '$144.64', A], [L('Receipt RC-1188', 'បង្កាន់ដៃ RC-1188'), L('Sent', 'បានផ្ញើ'), G]]],
+        ['fix', L('Report a repair', 'រាយការណ៍ការជួសជុល'), L('Any time', 'គ្រប់ពេល'), L('Report a problem with a photo', 'រាយការណ៍បញ្ហាជាមួយរូបថត'), L('Follow it from Sent to Seen to Fixing to Done, and see when the technician will come.', 'តាមដានពី បានផ្ញើ → បានឃើញ → កំពុងជួសជុល → រួចរាល់ ហើយដឹងថាជាងនឹងមកពេលណា។'), 'GAppRepair.dc.html',
+          [[L('Air-con not cooling', 'ម៉ាស៊ីនត្រជាក់មិនត្រជាក់'), L('Fixing', 'កំពុងជួសជុល'), A], [L('Visit Thu 29 · 2–4 pm', 'មកជួសជុល ព្រហស្បតិ៍ ២៩ · ២–៤ រសៀល'), L('Booked', 'បានកក់'), P], [L('Tap leaking', 'ក្បាលរ៉ូប៊ីណេលេច'), L('Done ★★★★★', 'រួចរាល់ ★★★★★'), G]]],
+        ['hist', L('See your history', 'មើលប្រវត្តិ'), L('Any time', 'គ្រប់ពេល'), L('Every bill and receipt, kept for you', 'វិក្កយបត្រ និងបង្កាន់ដៃទាំងអស់ ត្រូវបានរក្សាទុកសម្រាប់អ្នក'), L('Look back at past bills, usage and receipts — useful when you move out too.', 'មើលវិក្កយបត្រ ការប្រើប្រាស់ និងបង្កាន់ដៃចាស់ៗ — មានប្រយោជន៍ពេលចាកចេញផងដែរ។'), 'GApp10History.dc.html',
+          [[L('September', 'ខែកញ្ញា'), L('Paid', 'បានបង់'), G], [L('August', 'ខែសីហា'), L('Paid', 'បានបង់'), G], [L('Usage vs last month', 'ការប្រើប្រាស់ធៀបខែមុន'), '▲ 12%', Rd]]] ] }
+    };
+    var R = ROLES[role], FL = R.steps, fs = Math.min(st.fs || 0, FL.length - 1), f = FL[fs];
+    var yearly = !!st.yearly, openF = st.faq == null ? 0 : st.faq;
+    var dStep = st.dStep || 'form', dR = st.dR || '21–60', dSi = st.dSi || 0;
+    var SLOTS = [L('Thu 29 Oct · 10:00', 'ព្រហស្បតិ៍ ២៩ តុលា · ១០:០០'), L('Thu 29 Oct · 15:00', 'ព្រហស្បតិ៍ ២៩ តុលា · ១៥:០០'), L('Fri 30 Oct · 10:00', 'សុក្រ ៣០ តុលា · ១០:០០')];
+    function opt(l, on, pick) { return { l: l, sel: on ? 'true' : 'false', bg: on ? '#15201B' : '#FFFFFF', fg: on ? '#FFFFFF' : '#15201B', bd: on ? '#15201B' : '#D5DDD8', pick: pick }; }
+    var FAQ = [
+      [L('Do my tenants need to install anything?', 'តើអ្នកជួលត្រូវដំឡើងកម្មវិធីអ្វីទេ?'), L('No. Tenants link their Telegram once with the last 4 digits of their phone number. Renters looking for rooms can use the website or the guest app.', 'ទេ។ អ្នកជួលភ្ជាប់ Telegram តែម្តង ដោយប្រើលេខ ៤ ខ្ទង់ចុងក្រោយនៃទូរស័ព្ទ។ អ្នកស្វែងរកបន្ទប់អាចប្រើគេហទំព័រ ឬកម្មវិធីភ្ញៀវ។')],
+      [L('Can I bill in riel and dollars?', 'តើអាចចេញវិក្កយបត្រជារៀល និងដុល្លារបានទេ?'), L('Yes. Set electricity in riel, water and rent in dollars, and your own exchange rate. Bills show both.', 'បាន។ កំណត់អគ្គិសនីជារៀល ទឹក និងថ្លៃជួលជាដុល្លារ និងអត្រាប្តូរប្រាក់ផ្ទាល់ខ្លួន។ វិក្កយបត្របង្ហាញទាំងពីរ។')],
+      [L('Who holds the money?', 'តើនរណាជាអ្នកកាន់ប្រាក់?'), L('You do. Tenants pay into your own KHQR or bank account. RoomPilot only matches payments to bills.', 'អ្នកផ្ទាល់។ អ្នកជួលបង់ចូល KHQR ឬគណនីធនាគាររបស់អ្នក។ RoomPilot គ្រាន់តែផ្គូផ្គងការបង់ប្រាក់ទៅនឹងវិក្កយបត្រ។')],
+      [L('Is it free for renters?', 'តើឥតគិតថ្លៃសម្រាប់អ្នកជួលទេ?'), L('Yes. Exploring rooms, booking viewings and paying bills are always free for renters and tenants.', 'បាទ/ចាស។ ការស្វែងរកបន្ទប់ កក់មើលបន្ទប់ និងបង់វិក្កយបត្រ គឺឥតគិតថ្លៃជានិច្ចសម្រាប់អ្នកជួល។')],
+      [L('Can you move my data from Excel?', 'តើអាចផ្ទេរទិន្នន័យពី Excel បានទេ?'), L('Yes — send us your room list and tenants and we import them for free during setup.', 'បាន — ផ្ញើបញ្ជីបន្ទប់ និងអ្នកជួលមកយើង យើងនាំចូលជូនឥតគិតថ្លៃពេលរៀបចំ។')]
+    ];
+    function plan(n, price, unit, d, pts, cta, pop) {
+      return { n: n, price: price, unit: unit, d: d, cta: cta, pop: pop, pts: pts.map(function (l) { return { l: l }; }),
+        bg: pop ? '#0B4F38' : '#FFFFFF', fg: pop ? '#FFFFFF' : '#15201B', sub: pop ? '#BFE0D0' : '#6B7770', bd: pop ? '#0B4F38' : '#E2EAE5', line: pop ? '#1E6448' : '#EEF2EF', check: pop ? '#8FDDB5' : '#0F7A4F', cbg: '#FFFFFF', cfg: pop ? '#0B4F38' : '#15201B', cbd: pop ? '#FFFFFF' : '#D5DDD8' };
+    }
+
+    var OP = st.op || 'all', OR = st.or || 'B-112';
+    var ROOMST = { 'A-106': 'free', 'B-108': 'free', 'R-207': 'free', 'B-112': 'over', 'R-204': 'over', 'A-201': 'part', 'A-104': 'sent', 'A-207': 'sent', 'B-103': 'sent', 'R-211': 'sent', 'R-202': 'part' };
+    var WHO = { 'A-106': L('Studio · 22 m² · $200', 'ស្ទូឌីយោ · 22 m² · $200'), 'B-108': L('1-bed · 30 m² · $240', 'បន្ទប់គេង ១ · 30 m² · $240'), 'R-207': L('1-bed · 34 m² · $230', 'បន្ទប់គេង ១ · 34 m² · $230'), 'B-112': 'Mao Rina', 'R-204': 'Keo Vibol', 'A-201': 'Chan Sreymom', 'R-202': 'Sok Dara' };
+    var STY = {
+      paid: { bg: '#DCEFE5', fg: '#0B5D3B', bd: '1px solid #C2E2D1', l: L('Paid', 'បានបង់'), sbg: '#EEF7F2', sfg: '#0B5D3B', act: L('View receipt', 'មើលបង្កាន់ដៃ') },
+      sent: { bg: '#E3ECF8', fg: '#1F5FA8', bd: '1px solid #CCDBEF', l: L('Bill sent', 'បានផ្ញើវិក្កយបត្រ'), sbg: '#EEF3FB', sfg: '#1F5FA8', act: L('View bill', 'មើលវិក្កយបត្រ') },
+      part: { bg: '#FCEFD3', fg: '#7A4B00', bd: '1px solid #F2DDB0', l: L('Part paid', 'បង់ខ្លះ'), sbg: '#FDF6E7', sfg: '#7A4B00', act: L('Send reminder', 'ផ្ញើការរំលឹក') },
+      over: { bg: '#F8DEDB', fg: '#9A2A1E', bd: '1px solid #EFC4BF', l: L('Overdue', 'ហួសកំណត់'), sbg: '#FCEEEC', sfg: '#9A2A1E', act: L('Send reminder', 'ផ្ញើការរំលឹក') },
+      free: { bg: '#FFFFFF', fg: '#6B7770', bd: '1px dashed #B9C4BE', l: L('Free', 'ទំនេរ'), sbg: '#F3F6F4', sfg: '#4A5650', act: L('Share listing', 'ចែករំលែកការផ្សាយ') }
+    };
+    function roomsOf(pref, from, to) { var a = []; for (var n = from; n <= to; n++) a.push(pref + n); return a; }
+    var BLD = {
+      sokha: { name: 'Sokha Residence', rooms: roomsOf('A-', 101, 108).concat(roomsOf('A-', 201, 208), roomsOf('B-', 101, 116)), col: '$6,310', due: '$712' },
+      river: { name: 'Riverside Flats', rooms: roomsOf('R-', 201, 216), col: '$3,102', due: '$324' }
+    };
+    var keys = OP === 'all' ? ['sokha', 'river'] : [OP];
+    var allR = [];
+    keys.forEach(function (k) { allR = allR.concat(BLD[k].rooms); });
+    if (allR.indexOf(OR) < 0) OR = allR.filter(function (r) { return ROOMST[r] === 'over' || ROOMST[r] === 'free'; })[0] || allR[0];
+    function stOf(r) { return ROOMST[r] || 'paid'; }
+    var occ = allR.filter(function (r) { return stOf(r) !== 'free'; }).length;
+    var overN = allR.filter(function (r) { return stOf(r) === 'over'; }).length;
+    var selS = STY[stOf(OR)];
+    var selSt = stOf(OR);
+    var selLine = selS.l + (selSt === 'over' ? L(' · $78.10 · 8 days late', ' · $78.10 · យឺត ៨ ថ្ងៃ') : selSt === 'part' ? (OR === 'A-201' ? L(' · $144.64 left', ' · នៅសល់ $144.64') : L(' · $60.00 left', ' · នៅសល់ $60.00')) : selSt === 'free' ? L(' · ready to rent', ' · អាចជួលបាន') : selSt === 'sent' ? L(' · due Thu 5 Nov', ' · ផុតកំណត់ ៥ វិច្ឆិកា') : L(' · October · paid by KHQR', ' · ខែតុលា · បង់តាម KHQR'));
+    var NAMES = ['Sok Pisey', 'Chea Dara', 'Heng Sophea', 'Lim Vanna', 'Pich Sreynich', 'Ouk Ratha', 'Seng Malis', 'Tep Sovann', 'Nhem Bopha', 'Kong Visal', 'Yim Channa', 'Ros Leakhena', 'Phan Sokun', 'Meas Kosal'];
+    var PATHS = [
+        { owner: true, path: IC.home, k: L('ROOM OWNERS', 'ម្ចាស់បន្ទប់ជួល'), h: L('Manage rooms & get paid', 'គ្រប់គ្រងបន្ទប់ និងទទួលប្រាក់'), pts: [L('All properties & rooms in one screen', 'អគារ និងបន្ទប់ទាំងអស់ក្នុងអេក្រង់តែមួយ'), L('Bills on Telegram in 10 min', 'វិក្កយបត្រតាម Telegram ក្នុង ១០ នាទី'), L('See who paid instantly', 'ដឹងភ្លាមថាអ្នកណាបានបង់')], cta: L('Book a demo', 'កក់ការបង្ហាញ') },
+        { owner: false, path: IC.search, k: L('RENTERS', 'អ្នកជួល'), h: L('Find your next room', 'រកបន្ទប់ថ្មីរបស់អ្នក'), pts: [L('Verified rooms & real price', 'បន្ទប់ផ្ទៀងផ្ទាត់ តម្លៃពិត'), L('Book a free viewing', 'កក់មើលបន្ទប់ឥតគិតថ្លៃ'), L('Pay rent by KHQR', 'បង់ថ្លៃជួលតាម KHQR')], cta: L('Explore rooms', 'ស្វែងរកបន្ទប់') }
+      ].map(function (c) { var o = c.owner; return { isOwner: o, isRenter: !o, path: c.path, k: c.k, h: c.h, cta: c.cta, pts: c.pts.map(function (l) { return { l: l }; }), bg: o ? '#0B4F38' : '#FFFFFF', bd: o ? '#0B4F38' : '#DCE5E0', sh: o ? '0 14px 30px rgba(11, 79, 56, 0.25)' : '0 6px 18px rgba(16, 48, 32, 0.05)', ibg: o ? 'rgba(255,255,255,0.14)' : '#DCEFE5', ic: o ? '#8FDDB5' : '#0F7A4F', kc: o ? '#8FDDB5' : '#0F7A4F', fg: o ? '#FFFFFF' : '#15201B', sub: o ? '#CDEBDD' : '#4A5650', ck: o ? '#8FDDB5' : '#0F7A4F' }; });
+    return {
+      t: T,
+      enSel: km ? 'false' : 'true', kmSel: km ? 'true' : 'false', enBg: km ? 'transparent' : '#FFFFFF', kmBg: km ? '#FFFFFF' : 'transparent',
+      pickEn: function () { self.setState({ lang: 'en' }); }, pickKm: function () { self.setState({ lang: 'km' }); },
+      navLinks: [['#features', L('For owners', 'សម្រាប់ម្ចាស់ផ្ទះ')], ['#renters', L('For renters', 'សម្រាប់អ្នកជួល')], ['#how', L('How it works', 'របៀបដំណើរការ')], ['#pricing', L('Pricing', 'តម្លៃ')], ['#faq', L('FAQ', 'សំណួរ')]].map(function (l) { return { href: l[0], l: l[1] }; }),
+      tnQuick: [[L('Pay', 'បង់'), '$', '#DCEFE5', '#0B5D3B'], [L('Meters', 'កុងទ័រ'), 'kWh', '#FCEFD8', '#8A4B07'], [L('Repair', 'ជួសជុល'), 'FIX', '#E5EEF9', '#1F5FA8'], [L('Receipts', 'បង្កាន់ដៃ'), 'RC', '#E8EDEA', '#3D4249']].map(function (q) { return { l: q[0], ic: q[1], bg: q[2], fg: q[3] }; }),
+      tnUse: [
+        { k: L('Electricity', 'អគ្គិសនី'), now: '155 kWh', ch: '▲ 12%', chBg: '#FBEAE8', chFg: '#B3261E', c: '#E9A256', wNow: '100%', wPrev: '89%' },
+        { k: L('Water', 'ទឹក'), now: '9 m³', ch: '▼ 10%', chBg: '#E3F2E8', chFg: '#1C7A43', c: '#5B8DC9', wNow: '90%', wPrev: '100%' }
+      ],
+      ownPoints: [
+        { path: IC.home, t: L('See every room at a glance', 'មើលបន្ទប់ទាំងអស់ភ្លាមៗ'), d: L('Colours show paid, bill sent, overdue or free — for every property.', 'ពណ៌បង្ហាញ បានបង់ ផ្ញើវិក្កយបត្រ ហួសកំណត់ ឬទំនេរ — សម្រាប់គ្រប់អគារ។') },
+        { path: IC.list, t: L('Add properties & rooms in minutes', 'បញ្ចូលអគារ និងបន្ទប់ក្នុងប៉ុន្មាននាទី'), d: L('Type them in or send your Excel — we import it free.', 'វាយបញ្ចូល ឬផ្ញើ Excel — យើងនាំចូលជូនឥតគិតថ្លៃ។') },
+        { path: IC.bill, t: L('Bill every room in one click', 'ចេញវិក្កយបត្រគ្រប់បន្ទប់ដោយចុចម្តង'), d: L('Rent, water, electricity and parking — sent on Telegram.', 'ថ្លៃជួល ទឹក ភ្លើង និងចំណត — ផ្ញើតាម Telegram។') },
+        { path: IC.pay, t: L('Know who paid, without asking', 'ដឹងថាអ្នកណាបានបង់ ដោយមិនចាំបាច់សួរ'), d: L('KHQR payments match themselves. Reminders go out for you.', 'ការបង់ KHQR ផ្គូផ្គងដោយខ្លួនឯង។ ការរំលឹកផ្ញើជូនអ្នក។') }
+      ],
+      ownTabs: [['all', L('All', 'ទាំងអស់')], ['sokha', 'Sokha Residence'], ['river', 'Riverside Flats']].map(function (p) { var on = p[0] === OP; return { l: p[1], sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#15201B' : '#4A5650', sh: on ? '0 1px 2px rgba(16, 48, 32, 0.12)' : 'none', pick: function () { self.setState({ op: p[0] }); } }; }),
+      ownKpi: [
+        { l: L('Rooms', 'បន្ទប់'), v: String(allR.length), c: '#15201B' },
+        { l: L('Occupied', 'មានអ្នកជួល'), v: occ + '/' + allR.length, c: '#15201B' },
+        { l: L('Collected', 'ប្រមូលបាន'), v: OP === 'all' ? '$9,412' : BLD[OP].col, c: '#0B5D3B' },
+        { l: L('Overdue', 'ហួសកំណត់'), v: String(overN), c: overN ? '#9A2A1E' : '#15201B' }
+      ],
+      ownBlocks: keys.map(function (k) { var b = BLD[k]; return { name: b.name, count: L(b.rooms.length + ' rooms', b.rooms.length + ' បន្ទប់'), rooms: b.rooms.map(function (r) { var y = STY[stOf(r)], on = r === OR; return { short: r, aria: r + ' · ' + y.l, sel: on ? 'true' : 'false', bg: y.bg, fg: y.fg, bd: y.bd, ring: on ? '0 0 0 2px #15201B' : 'none', pick: function () { self.setState({ or: r }); } }; }) }; }),
+      ownLegend: ['paid', 'sent', 'part', 'over', 'free'].map(function (k) { return { l: STY[k].l, bg: STY[k].bg, bd: STY[k].bd }; }),
+      ownSel: { room: OR, who: WHO[OR] || NAMES[(allR.indexOf(OR) * 7) % NAMES.length], st: selLine, bg: selS.sbg, fg: selS.sfg, act: selS.act },
+      ownActions: [['+', L('Add room', 'បន្ថែមបន្ទប់')], ['+', L('Add tenant', 'បន្ថែមអ្នកជួល')], ['↗', L('Send bills', 'ផ្ញើវិក្កយបត្រ')], ['$', L('Record cash', 'កត់ត្រាសាច់ប្រាក់')]].map(function (q) { return { i: q[0], l: q[1] }; }),
+      feats: [
+        { path: IC.home, t: L('Every room at a glance', 'មើលបន្ទប់ទាំងអស់ភ្លាមៗ'), d: L('See which rooms are paid, due, overdue or free — across all your properties.', 'មើលបន្ទប់ណាបានបង់ ត្រូវបង់ ហួសកំណត់ ឬទំនេរ — គ្រប់អគាររបស់អ្នក។') },
+        { path: IC.cam, t: L('Meter photos, read for you', 'អានលេខពីរូបថតកុងទ័រឱ្យអ្នក'), d: L('Caretakers snap each meter. The number, photo and time are saved as proof.', 'អ្នកថែទាំថតកុងទ័រ។ លេខ រូបថត និងពេលវេលា ត្រូវរក្សាទុកជាភស្តុតាង។') },
+        { path: IC.chat, t: L('Bills on Telegram', 'វិក្កយបត្រតាម Telegram'), d: L('Clear bills in Khmer and English, with meter photos, sent to every tenant.', 'វិក្កយបត្រច្បាស់ ជាភាសាខ្មែរ និងអង់គ្លេស មានរូបថតកុងទ័រ ផ្ញើទៅអ្នកជួលគ្រប់គ្នា។') },
+        { path: IC.qr, t: L('KHQR payments matched', 'ការបង់ KHQR ផ្គូផ្គងស្វ័យប្រវត្តិ'), d: L('Every payment lands on the right bill. Reminders go out for you.', 'ការបង់ប្រាក់នីមួយៗចូលត្រូវវិក្កយបត្រ។ ការរំលឹកត្រូវផ្ញើជូនអ្នក។') },
+        { path: IC.key, t: L('Tenants & contracts', 'អ្នកជួល និងកិច្ចសន្យា'), d: L('Move-in and move-out with photos, deposits and starting meter readings.', 'ចូលនៅ និងចាកចេញ ជាមួយរូបថត ប្រាក់កក់ និងលេខកុងទ័រដំបូង។') },
+        { path: IC.chart, t: L('Reports for your accountant', 'របាយការណ៍សម្រាប់គណនេយ្យករ'), d: L('Income, unpaid bills and occupancy by property and month. Export any time.', 'ចំណូល វិក្កយបត្រមិនទាន់បង់ និងអត្រាជួល តាមអគារ និងខែ។ នាំចេញបានគ្រប់ពេល។') }
+      ],
+      steps3: [
+        { n: '01', t: L('Snap the meters', 'ថតកុងទ័រ'), d: L('Your caretaker photographs each meter. RoomPilot reads the number and flags anything odd.', 'អ្នកថែទាំថតកុងទ័រនីមួយៗ។ RoomPilot អានលេខ ហើយបង្ហាញលេខណាដែលមិនប្រក្រតី។'), tag: L('About 20 seconds a room', 'ប្រហែល ២០ វិនាទី ក្នុងមួយបន្ទប់') },
+        { n: '02', t: L('Check and send', 'ពិនិត្យ និងផ្ញើ'), d: L('Rent, utilities, parking and arrears are added up. One click sends every bill on Telegram.', 'ថ្លៃជួល ទឹកភ្លើង ចំណត និងប្រាក់ជំពាក់ត្រូវបូកសរុប។ ចុចម្តងផ្ញើវិក្កយបត្រទាំងអស់តាម Telegram។'), tag: L('46 bills in 10 minutes', '៤៦ វិក្កយបត្រ ក្នុង ១០ នាទី') },
+        { n: '03', t: L('Get paid', 'ទទួលប្រាក់'), d: L('Tenants pay by KHQR from any bank. Payments match themselves and receipts go out.', 'អ្នកជួលបង់តាម KHQR ពីធនាគារណាមួយ។ ការបង់ប្រាក់ផ្គូផ្គងដោយខ្លួនឯង ហើយបង្កាន់ដៃត្រូវផ្ញើចេញ។'), tag: L('28 of 30 paid by day 3', 'បានបង់ ២៨/៣០ ត្រឹមថ្ងៃទី ៣') }
+      ],
+      dashNav: [[IC.chart, 1], [IC.home, 0], [IC.bill, 0], [IC.pay, 0], [IC.fix, 0]].map(function (n) { return { path: n[0], bg: n[1] ? '#13704F' : 'transparent', c: n[1] ? '#FFFFFF' : '#8FC9AE' }; }),
+      dashKpi: [
+        { l: L('Collected', 'ប្រមូលបាន'), v: '$9,412', c: '#0B5D3B', d: L('▲ 6% vs Sep', '▲ ៦% ធៀបខែកញ្ញា'), dc: '#1C7A43' },
+        { l: L('To collect', 'នៅត្រូវប្រមូល'), v: '$1,036', c: '#A86A00', d: L('16 bills', '១៦ វិក្កយបត្រ'), dc: '#6B7770' },
+        { l: L('Occupancy', 'អត្រាជួល'), v: '94%', c: '#15201B', d: L('45/48 rooms', '៤៥/៤៨ បន្ទប់'), dc: '#6B7770' },
+        { l: L('Overdue', 'ហួសកំណត់'), v: '2', c: '#9A2A1E', d: '$156.20', dc: '#9A2A1E' }
+      ],
+      dashBars: [['May', 'ឧសភា', 7.9, 70], ['Jun', 'មិថុនា', 8.2, 74], ['Jul', 'កក្កដា', 8.4, 77], ['Aug', 'សីហា', 8.6, 80], ['Sep', 'កញ្ញា', 8.9, 84], ['Oct', 'តុលា', 9.4, 92]].map(function (b, i) { return { m: L(b[0], b[1]), v: '$' + b[2] + 'k', h: b[3] + '%', c: i === 5 ? '#0F7A4F' : '#CFE7DA' }; }),
+      dashAttn: [
+        { c: '#B42318', t: L('B-112 overdue', 'B-112 ហួសកំណត់'), d: L('$78.10 · 8 days late', '$78.10 · យឺត ៨ ថ្ងៃ') },
+        { c: '#A86A00', t: L('2 readings to check', 'លេខកុងទ័រ ២ ត្រូវពិនិត្យ'), d: L('R-205 · R-106', 'R-205 · R-106') },
+        { c: '#1F5FA8', t: L('Viewing Sat 10:00', 'មើលបន្ទប់ សៅរ៍ ១០:០០'), d: L('A-106 · Kim Sovanna', 'A-106 · Kim Sovanna') }
+      ],
+      dashInv: [['A-201', 'Chan Sreymom', '$244.64', 'part'], ['A-202', 'Tep Sovann', '$231.10', 'paid'], ['R-204', 'Keo Vibol', '$78.10', 'over']].map(function (r, i) { var m = { part: [L('PART PAID', 'បង់ខ្លះ'), '#FDF0D5', '#7A4B00'], paid: [L('PAID', 'បានបង់'), '#DCEFE5', '#0B5D3B'], over: [L('OVERDUE', 'ហួសកំណត់'), '#FBE4E1', '#9A2A1E'] }[r[3]]; return { room: r[0], who: r[1], amt: r[2], st: m[0], bg: m[1], fg: m[2], bb: i < 2 ? '1px solid #F0F4F1' : '0' }; }),
+      ticks: [L('Free setup', 'រៀបចំឥតគិតថ្លៃ'), L('We import your Excel', 'យើងនាំចូល Excel ជូន'), L('Free for renters & tenants', 'ឥតគិតថ្លៃសម្រាប់អ្នកជួល')].map(function (l) { return { l: l }; }),
+      heroMini: ['p','p','p','p','p','f','p','p','d','p','p','p','p','p','d','p'].map(function (k) { return { bg: k === 'p' ? '#8FDDB5' : k === 'd' ? '#F0B969' : 'transparent', bd: k === 'f' ? '1px dashed #CDEBDD' : '0' }; }),
+      paths: PATHS, pathsA: [PATHS[0]], pathsB: [PATHS[1]],
+      heroStats: [['10 min', L('to bill every room', 'ចេញវិក្កយបត្រគ្រប់បន្ទប់')], ['93%', L('paid by day 3', 'បានបង់ត្រឹមថ្ងៃទី ៣')], ['$0', L('for renters & tenants', 'សម្រាប់អ្នកជួល')]].map(function (x, i) { return { v: x[0], l: x[1], bl: i ? '1px solid #DCE5E0' : '0' }; }),
+      journey: [
+        ['search', L('Explore', 'ស្វែងរក'), L('Browse free rooms by area & budget', 'រកបន្ទប់ទំនេរតាមតំបន់ និងថវិកា')],
+        ['compare', L('Select', 'ជ្រើសរើស'), L('Compare, then book a viewing', 'ប្រៀបធៀប រួចកក់មើលបន្ទប់')],
+        ['key', L('Rent', 'ជួល'), L('Sign, pay deposit, move in', 'ចុះហត្ថលេខា បង់ប្រាក់កក់ ចូលនៅ')],
+        ['bill', L('Manage rent', 'គ្រប់គ្រងថ្លៃជួល'), L('Telegram bills, KHQR payments', 'វិក្កយបត្រ Telegram បង់ KHQR')]
+      ].map(function (x, i) { var last = i === 3; return { arrow: !last, n: (km ? 'ជំហាន ' + ['១','២','៣','៤'][i] : 'STEP ' + (i + 1)), path: IC[x[0]], t: x[1], d: x[2], bg: last ? '#0F7A4F' : 'transparent', fg: last ? '#FFFFFF' : '#15201B', sub: last ? '#CDEBDD' : '#6B7770', ibg: last ? 'rgba(255,255,255,0.16)' : '#DCEFE5', ic: last ? '#FFFFFF' : '#0F7A4F', nc: last ? '#8FDDB5' : '#0F7A4F' }; }),
+      mockKpi: [{ l: L('Bills sent', 'វិក្កយបត្របានផ្ញើ'), v: '46', c: '#15201B' }, { l: L('Collected', 'ប្រមូលបាន'), v: '$9,412', c: '#0B5D3B' }, { l: L('To collect', 'នៅត្រូវប្រមូល'), v: '$1,036', c: '#A86A00' }],
+      mockRows: [
+        { room: 'A-201', usage: '155 kWh · 9 m³', amt: '$244.64', st: L('PART PAID', 'បង់ខ្លះ'), bg: '#FDF0D5', fg: '#7A4B00' },
+        { room: 'A-202', usage: '132 kWh · 7 m³', amt: '$231.10', st: L('PAID', 'បានបង់'), bg: '#DCEFE5', fg: '#0B5D3B' },
+        { room: 'A-203', usage: '201 kWh · 11 m³', amt: '$258.92', st: L('SENT', 'បានផ្ញើ'), bg: '#E8F0FB', fg: '#1F5FA8' }
+      ],
+      why: [
+        { icon: IC.cam, t: L('Meter photos read for you', 'អានលេខពីរូបថតកុងទ័រឱ្យអ្នក'), d: L('Caretakers snap each meter. The number, photo and time are saved together — no typing, no lost notebooks.', 'អ្នកថែទាំថតកុងទ័រនីមួយៗ។ លេខ រូបថត និងពេលវេលា ត្រូវបានរក្សាទុកជាមួយគ្នា — មិនចាំបាច់វាយ គ្មានសៀវភៅបាត់។'), old: L('Walking every floor with a notebook', 'ដើរគ្រប់ជាន់ជាមួយសៀវភៅកត់ត្រា') },
+        { icon: IC.chat, t: L('Clear bills tenants trust', 'វិក្កយបត្រច្បាស់ដែលអ្នកជួលទុកចិត្ត'), d: L('Every bill shows both meter photos, in Khmer and English, right in Telegram. Arguments about electricity stop.', 'វិក្កយបត្រនីមួយៗបង្ហាញរូបថតកុងទ័រទាំងពីរ ជាភាសាខ្មែរ និងអង់គ្លេស ក្នុង Telegram។ ឈប់មានការឈ្លោះរឿងថ្លៃភ្លើង។'), old: L('Arguing about the electricity bill', 'ឈ្លោះគ្នារឿងវិក្កយបត្រភ្លើង') },
+        { icon: IC.qr, t: L('KHQR payments match themselves', 'ការបង់ KHQR ផ្គូផ្គងដោយខ្លួនឯង'), d: L('Each bill has its own KHQR. Payments land on the right invoice — part payments and arrears included.', 'វិក្កយបត្រនីមួយៗមាន KHQR ផ្ទាល់ខ្លួន។ ការបង់ប្រាក់ចូលត្រូវវិក្កយបត្រ — រួមទាំងការបង់ខ្លះ និងប្រាក់ជំពាក់។'), old: L('Checking bank apps for who paid', 'ឆែកកម្មវិធីធនាគារមើលថាអ្នកណាបានបង់') }
+      ],
+      roles: ['owner', 'renter', 'staff', 'tenant'].map(function (k) { var on = k === role; return { l: ROLES[k].l, sel: on ? 'true' : 'false', bg: on ? '#0F7A4F' : 'transparent', fg: on ? '#FFFFFF' : '#4A5650', pick: function () { self.setState({ role: k, fs: 0 }); } }; }),
+      cols: String(FL.length),
+      stepOf: L(R.l + ' · step ' + (fs + 1) + ' of ' + FL.length, R.l + ' · ជំហាន ' + (fs + 1) + ' នៃ ' + FL.length),
+      flow: FL.map(function (x, i) { var on = i === fs, done = i < fs; return { n: String(i + 1), t: x[1], when: x[2], sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', bd: on ? '#CFE3D7' : 'transparent', sh: on ? '0 8px 24px rgba(16, 48, 32, 0.08)' : 'none', nbg: on || done ? '#0F7A4F' : '#E2EAE5', nfg: on || done ? '#FFFFFF' : '#4A5650', pick: function () { self.setState({ fs: i }); } }; }),
+      fc: { n: String(fs + 1), who: R.l, path: IC[f[0]], h: f[3], d: f[4], href: f[5], vis: f[6].map(function (v) { return { l: v[0], s: v[1], c: v[2] }; }) },
+      prevStep: function () { self.setState({ fs: Math.max(0, fs - 1) }); },
+      nextStep: function () { self.setState({ fs: fs >= FL.length - 1 ? 0 : fs + 1 }); },
+      nextLabel: fs >= FL.length - 1 ? L('Start again ↺', 'ចាប់ផ្តើមម្តងទៀត ↺') : L('Next step →', 'ជំហានបន្ទាប់ →'),
+      rentPoints: [
+        { path: IC.dollar, t: L('The real monthly total', 'តម្លៃសរុបពិតប្រចាំខែ'), d: L('Rent plus estimated bills. No surprises.', 'ថ្លៃជួល បូកថ្លៃទឹកភ្លើងប៉ាន់ស្មាន។ គ្មានការភ្ញាក់ផ្អើល។') },
+        { path: IC.map, t: L('Map & travel time', 'ផែនទី និងរយៈពេលធ្វើដំណើរ'), d: L('See how far each room is from work.', 'មើលថាបន្ទប់នីមួយៗឆ្ងាយពីកន្លែងធ្វើការប៉ុណ្ណា។') },
+        { path: IC.shield, t: L('Verified & up to date', 'ផ្ទៀងផ្ទាត់ និងទាន់សម័យ'), d: L('Checked landlords, dated photos, video tours.', 'ម្ចាស់ផ្ទះបានផ្ទៀងផ្ទាត់ រូបថតមានកាលបរិច្ឆេទ វីដេអូបង្ហាញបន្ទប់។') },
+        { path: IC.cal, t: L('Free viewings', 'មើលបន្ទប់ឥតគិតថ្លៃ'), d: L('Pick a time and chat on Telegram.', 'ជ្រើសម៉ោង ហើយជជែកតាម Telegram។') }
+      ],
+      phoneChips: [[L('All', 'ទាំងអស់'), 0], [L('Rooms · 3', 'បន្ទប់ · ៣'), 0], [L('Properties · 2', 'អគារ · ២'), 1], [L('Toul Kork', 'ទួលគោក'), 0], [L('Chroy Changvar', 'ជ្រោយចង្វារ'), 0]].map(function (c) { return { l: c[0], bg: c[1] ? '#0D4A35' : '#FFFFFF', fg: c[1] ? '#FFFFFF' : '#15201B', bd: c[1] ? '#0D4A35' : '#E2E8E4' }; }),
+      phoneProps: [
+        { name: 'Sokha Residence', from: '$200', area: L('St. 271, Toul Kork', 'ផ្លូវ ២៧១ ទួលគោក'), avail: L('2 rooms available', '២ បន្ទប់ទំនេរ'), sky: '#CDE6D9', tags: [L('32 rooms', '៣២ បន្ទប់'), L('Studios & 1-bed', 'ស្ទូឌីយោ និង ១ បន្ទប់គេង'), L('Caretaker on site', 'មានអ្នកថែទាំនៅទីនោះ')] },
+        { name: 'Riverside Flats', from: '$230', area: L('Chroy Changvar', 'ជ្រោយចង្វារ'), avail: L('1 room available', '១ បន្ទប់ទំនេរ'), sky: '#D7E2EE', tags: [L('16 rooms', '១៦ បន្ទប់'), L('River views', 'មើលឃើញទន្លេ'), L('Air-con', 'ម៉ាស៊ីនត្រជាក់')] }
+      ].map(function (p) { p.tags = p.tags.map(function (l) { return { l: l }; }); return p; }),
+      periods: [['m', L('Monthly', 'ប្រចាំខែ')], ['y', L('Yearly · save 20%', 'ប្រចាំឆ្នាំ · សន្សំ ២០%')]].map(function (p) { var on = (p[0] === 'y') === yearly; return { l: p[1], sel: on ? 'true' : 'false', bg: on ? '#15201B' : 'transparent', fg: on ? '#FFFFFF' : '#4A5650', pick: function () { self.setState({ yearly: p[0] === 'y' }); } }; }),
+      plans: [
+        plan(L('Starter', 'ចាប់ផ្តើម'), '$0', L('up to 15 rooms', 'រហូតដល់ ១៥ បន្ទប់'), L('For a small boarding house getting off paper.', 'សម្រាប់ផ្ទះជួលតូចៗ ដែលចង់ឈប់ប្រើក្រដាស។'), [L('1 building', 'អគារ ១'), L('Meter photos & billing', 'រូបថតកុងទ័រ និងវិក្កយបត្រ'), L('Telegram bills', 'វិក្កយបត្រតាម Telegram'), L('KHQR payments', 'ការបង់តាម KHQR')], L('Start free', 'ចាប់ផ្តើមឥតគិតថ្លៃ'), false),
+        plan('Pro', yearly ? '$0.80' : '$1', L('per room / month', 'ក្នុងមួយបន្ទប់ / ខែ'), L('For owners with one or more full buildings.', 'សម្រាប់ម្ចាស់អគារមួយ ឬច្រើន។'), [L('Unlimited buildings', 'អគារមិនកំណត់'), L('Staff app with OCR', 'កម្មវិធីបុគ្គលិកអានលេខស្វ័យប្រវត្តិ'), L('Parking & services', 'ចំណត និងសេវា'), L('Free rooms shown to renters', 'បន្ទប់ទំនេរបង្ហាញដល់អ្នកជួល'), L('Reports & exports', 'របាយការណ៍ និងការនាំចេញ')], L('Book a demo', 'កក់ការបង្ហាញ'), true),
+        plan(L('Business', 'អាជីវកម្ម'), L('Custom', 'តាមតម្រូវការ'), L('200+ rooms', '២០០+ បន្ទប់'), L('For property companies and managers.', 'សម្រាប់ក្រុមហ៊ុនអចលនទ្រព្យ និងអ្នកគ្រប់គ្រង។'), [L('Everything in Pro', 'គ្រប់យ៉ាងក្នុង Pro'), L('Team roles & audit log', 'តួនាទីក្រុម និងកំណត់ហេតុ'), L('Data import & training', 'នាំចូលទិន្នន័យ និងបណ្តុះបណ្តាល'), L('Priority Telegram support', 'ជំនួយតាម Telegram អាទិភាព')], L('Talk to sales', 'និយាយជាមួយផ្នែកលក់'), false)
+      ],
+      faq: FAQ.map(function (q, i) { var on = i === openF; return { q: q[0], a: q[1], isOpen: on, open: on ? 'true' : 'false', sign: on ? '−' : '+', toggle: function () { self.setState({ faq: on ? -1 : i }); } }; }),
+      footCols: [
+        { h: L('Product', 'ផលិតផល'), links: [[L('Landlord web app', 'កម្មវិធីម្ចាស់ផ្ទះ'), 'Main.dc.html'], [L('Staff meter app', 'កម្មវិធីអានកុងទ័រ'), 'StaffHome.dc.html'], [L('Tenant Telegram', 'Telegram សម្រាប់អ្នកជួល'), 'TgChat.dc.html'], [L('Bilingual invoice', 'វិក្កយបត្រពីរភាសា'), 'InvoicePDF.dc.html']] },
+        { h: L('Renters', 'អ្នកជួល'), links: [[L('Find a room', 'ស្វែងរកបន្ទប់'), 'PublicListing.dc.html'], [L('Guest app', 'កម្មវិធីភ្ញៀវ'), 'GApp0Welcome.dc.html']] },
+        { h: L('Contact', 'ទំនាក់ទំនង'), links: [['Telegram @roompilot', 'https://t.me/'], [L('Book a demo', 'កក់ការបង្ហាញ'), '#top'], [L('Sign in', 'ចូល'), 'SignIn.dc.html']] }
+      ].map(function (c) { return { h: c.h, links: c.links.map(function (l) { return { l: l[0], href: l[1] }; }) }; }),
+      demoOpen: !!st.demo,
+      openDemo: function () { self.setState({ demo: true, dStep: 'form' }); },
+      closeDemo: function () { self.setState({ demo: false }); },
+      dForm: dStep === 'form', dConfirm: dStep === 'confirm', dDone: dStep === 'done',
+      demoTitle: dStep === 'confirm' ? L('Book this demo?', 'កក់ការបង្ហាញនេះ?') : dStep === 'done' ? L('You\'re booked', 'បានកក់រួចរាល់') : L('Book a 30-minute demo', 'កក់ការបង្ហាញ ៣០ នាទី'),
+      demoStepLabel: dStep === 'form' ? L('Step 1 of 2', 'ជំហាន ១ នៃ ២') : dStep === 'confirm' ? L('Step 2 of 2 · confirm', 'ជំហាន ២ នៃ ២ · បញ្ជាក់') : L('Done', 'រួចរាល់'),
+      dRooms: ['1–20', '21–60', '61–200', '200+'].map(function (x) { return opt(x, x === dR, function () { self.setState({ dR: x }); }); }),
+      dSlots: SLOTS.map(function (x, i) { return opt(x, i === dSi, function () { self.setState({ dSi: i }); }); }),
+      dSlotSel: SLOTS[dSi],
+      dSummary: L(dR + ' rooms · ' + SLOTS[dSi] + ' · 30 min, on Telegram video or in person', dR + ' បន្ទប់ · ' + SLOTS[dSi] + ' · ៣០ នាទី តាមវីដេអូ Telegram ឬជួបផ្ទាល់'),
+      dNext: function () { self.setState({ dStep: 'confirm' }); },
+      dBack: function () { self.setState({ dStep: 'form' }); },
+      dSend: function () { self.setState({ dStep: 'done' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
