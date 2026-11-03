@@ -1,4 +1,4 @@
-# 67 · Sales · RoomPilot landing page (demo) — design reference
+# 67 · Sales · Nestvo landing page (demo) — design reference
 
 This is a design mockup created in a visual design tool, exported as a
 standalone page. Treat it as a REFERENCE MOCKUP, not production code:
@@ -12,6 +12,9 @@ rather than copy wholesale.
 - `Landing.dc.html` — the artboard (a Design Component: an `<x-dc>`
   template + a small logic class). The values to replicate live in its
   inline `style="…"` attributes and the `<helmet><style>` block.
+- `OApp1Home.dc.html` — referenced resource
+- `OApp2Rooms.dc.html` — referenced resource
+- `OApp4Money.dc.html` — referenced resource
 - `support.js`, `vendor/react*.js` — the runtime that renders the
   component in a browser; not part of the design.
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>RoomPilot landing</title>
+<title>Nestvo landing</title>
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
 <script src="./support.js"></script>
@@ -32,6 +32,7 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 @media (max-width: 860px){
  .lp-grid3{grid-template-columns:1fr!important}
  .lp-phone{display:none}
+ .lp-phones{transform:scale(0.8);transform-origin:top center;height:420px!important}
  .lp-shot{padding-bottom:48px!important}
 }
 @media (max-width: 600px){
@@ -45,6 +46,7 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
  .lp-btns{flex-direction:column;align-self:stretch}
  .lp-btns > *{justify-content:center}
  .lp-cta{padding:48px 20px!important}
+ .lp-phones{transform:scale(0.62);height:330px!important;margin-left:-20%;width:140%!important;max-width:none!important}
  .lp-foot{grid-template-columns:1fr!important}
  .lp-2col{grid-template-columns:1fr!important}
  .lp-tabs{display:flex!important;width:100%;overflow-x:auto;box-sizing:border-box}
@@ -59,7 +61,7 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 
 <header style="position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid #EDF1EE">
 <div class="lp-wrap lp-hdr" style="height: 68px; display: flex; align-items: center; gap: 40px">
-<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #15201B"><span style="width: 32px; height: 32px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 18px; letter-spacing: -0.01em">RoomPilot</b></a>
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #15201B"><span style="width: 32px; height: 32px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 18px; letter-spacing: -0.01em">Nestvo</b></a>
 <nav class="lp-nav" aria-label="Sections" style="display: flex; gap: 30px; font-size: 15px">
 <sc-for list="{{navLinks}}" as="l" hint-placeholder-count="4"><a href="{{l.href}}" style="color: #4A5650; text-decoration: none">{{l.l}}</a></sc-for>
 </nav>
@@ -71,15 +73,15 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 </div>
 </header>
 
-<section id="top" class="lp-herosec" style="background: radial-gradient(90% 80% at 85% 20%, #E4F3EA 0%, #F6FBF8 45%, #FFFFFF 75%); overflow: hidden; min-height: clamp(640px, calc(100vh - 68px), 860px); display: flex; align-items: center">
-<div class="lp-wrap lp-hero" style="width: 100%; padding-top: 64px; padding-bottom: 88px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center">
+<section id="top" class="lp-herosec" style="background: radial-gradient(90% 80% at 85% 20%, #E4F3EA 0%, #F6FBF8 45%, #FFFFFF 75%); overflow: hidden; min-height: clamp(600px, calc(100vh - 68px), 760px); display: flex; align-items: center">
+<div class="lp-wrap lp-hero" style="width: 100%; padding-top: 48px; padding-bottom: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 56px; align-items: center">
 <div class="lp-hero-l" style="display: flex; flex-direction: column; align-items: flex-start; gap: 24px">
 <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding: 5px 12px 5px 6px; border-radius: 20px; background: #FFFFFF; border: 1px solid #D9E8DF; color: #0B5D3B"><span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #0F7A4F; color: #FFFFFF">{{t.badge}}</span>{{t.eyebrow}}</span>
 <h1 class="lp-h1" style="margin: 0; font-size: 50px; line-height: 1.08; white-space: nowrap; font-weight: 700; letter-spacing: -0.04em">{{t.h1a}}<br><span style="color: #0F7A4F">{{t.h1b}}</span></h1>
 <p style="margin: 0; max-width: 500px; font-size: 18px; line-height: 1.65; color: #4A5650">{{t.lead}}</p>
 <div class="lp-btns" style="display: flex; gap: 12px; margin-top: 6px">
 <button onClick="{{openDemo}}" style="min-height: 54px; padding: 0 28px; border: 0; border-radius: 14px; background: #0F7A4F; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 700; box-shadow: 0 10px 24px rgba(15, 122, 79, 0.28)">{{t.book}}</button>
-<a href="PublicListing.dc.html" style="min-height: 54px; padding: 0 24px; border-radius: 14px; border: 1px solid #CFDDD5; background: #FFFFFF; color: #15201B; text-decoration: none; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7A4F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10.5 17a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM15.5 15.5L21 21"></path></svg>{{t.rentCta}}</a>
+<a href="Main.dc.html" style="min-height: 54px; padding: 0 24px; border-radius: 14px; border: 1px solid #CFDDD5; background: #FFFFFF; color: #15201B; text-decoration: none; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0F7A4F" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>{{t.tryDemo}}</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: #6B7770">
 <sc-for list="{{ticks}}" as="h" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 6px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#0F7A4F" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5l3 3L13 4.5"></path></svg>{{h.l}}</span></sc-for>
@@ -87,7 +89,7 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 </div>
 <div class="lp-shot" style="position: relative; padding-right: 40px">
 <div style="width: 100%; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE7E1; box-shadow: 0 40px 80px rgba(16, 48, 32, 0.14); overflow: hidden">
-<div style="display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; background: #F6F8F7; border-bottom: 1px solid #E6ECE8"><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="margin: 0 auto; padding: 3px 14px; border-radius: 7px; background: #FFFFFF; font-size: 11px; color: #8A938E">app.roompilot.com</span></div>
+<div style="display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; background: #F6F8F7; border-bottom: 1px solid #E6ECE8"><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="width: 10px; height: 10px; border-radius: 5px; background: #E3E8E5"></span><span style="margin: 0 auto; padding: 3px 14px; border-radius: 7px; background: #FFFFFF; font-size: 11px; color: #8A938E">app.nestvo.com</span></div>
 <div style="display: flex; background: #F6F8F7; text-align: left">
 <div style="flex: none; width: 52px; background: #0B4F38; padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 10px">
 <span style="width: 30px; height: 30px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span>
@@ -116,7 +118,7 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 </div>
 </div>
 </div>
-<div class="lp-phone lp-float" aria-hidden="true" style="position: absolute; right: -36px; top: 96px; z-index: 2; transform: scale(0.62); transform-origin: top right; filter: drop-shadow(0 30px 40px rgba(16, 48, 32, 0.28))">
+<div class="lp-phone lp-float" aria-hidden="true" style="position: absolute; right: -36px; top: 178px; z-index: 2; transform: scale(0.62); transform-origin: top right; filter: drop-shadow(0 30px 40px rgba(16, 48, 32, 0.28))">
 <div style="position: relative; width: 252px; height: 524px; box-sizing: border-box; border-radius: 40px; background: #15201B; padding: 9px; box-shadow: 0 28px 60px rgba(16, 48, 32, 0.28); z-index: 1">
 <div style="width: 234px; height: 506px; border-radius: 32px; overflow: hidden; position: relative">
 <div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.6); transform-origin: 0 0; box-sizing: border-box; background: #F3F6F4; color: #15201B; display: flex; flex-direction: column; overflow: hidden">
@@ -174,6 +176,21 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 <b style="font-size: 18px; letter-spacing: -0.01em">{{f.t}}</b>
 <span style="font-size: 15px; line-height: 1.6; color: #5E6A64">{{f.d}}</span>
 </div></sc-for>
+</div>
+<div class="lp-split" style="margin-top: 88px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: center; padding: 48px; border-radius: 28px; background: #F2F8F4">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; padding: 5px 10px; border-radius: 8px; background: #DCEFE5; color: #0B5D3B">{{t.oaTag}}</span>
+<h3 class="lp-h2" style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em">{{t.oaH}}</h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #4A5650">{{t.oaSub}}</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{oaPts}}" as="x" hint-placeholder-count="4"><li style="display: flex; gap: 10px; font-size: 15px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#0F7A4F" stroke-width="2.2" style="flex: none; margin-top: 3px" aria-hidden="true"><path d="M3 8.5l3 3L13 4.5"></path></svg><span><b>{{x.t}}</b> <span style="color: #5E6A64">{{x.d}}</span></span></li></sc-for>
+</ul>
+</div>
+<div class="lp-phones" aria-hidden="true" inert="" style="position: relative; height: 504px; max-width: 560px; width: 100%; justify-self: center">
+<div style="position: absolute; left: 0px; top: 40px; width: 214px; height: 464px; border-radius: 30px; background: #15201B; padding: 7px; box-sizing: border-box; box-shadow: 0 24px 50px rgba(16, 48, 32, 0.22)"><div style="width: 200px; height: 450px; border-radius: 24px; overflow: hidden; position: relative"><div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.5128); transform-origin: 0 0; pointer-events: none"><dc-import name="OApp2Rooms" hint-size="390px,844px"></dc-import></div></div></div>
+<div style="position: absolute; left: calc(100% - 214px); top: 40px; width: 214px; height: 464px; border-radius: 30px; background: #15201B; padding: 7px; box-sizing: border-box; box-shadow: 0 24px 50px rgba(16, 48, 32, 0.22)"><div style="width: 200px; height: 450px; border-radius: 24px; overflow: hidden; position: relative"><div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.5128); transform-origin: 0 0; pointer-events: none"><dc-import name="OApp4Money" hint-size="390px,844px"></dc-import></div></div></div>
+<div style="position: absolute; left: calc(50% - 107px); top: 0px; width: 214px; height: 464px; border-radius: 30px; background: #15201B; padding: 7px; box-sizing: border-box; z-index: 2; box-shadow: 0 30px 60px rgba(16, 48, 32, 0.22)"><div style="width: 200px; height: 450px; border-radius: 24px; overflow: hidden; position: relative"><div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: scale(0.5128); transform-origin: 0 0; pointer-events: none"><dc-import name="OApp1Home" hint-size="390px,844px"></dc-import></div></div></div>
+</div>
 </div>
 </div>
 </section>
@@ -291,13 +308,14 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 </article>
 </sc-for>
 </div>
+<p style="margin: 22px 0 0; text-align: center; font-size: 14px; color: #6B7770">{{t.priceFoot}}</p>
 </div>
 </section>
 
 <section id="faq" class="lp-sec lp-wrap" aria-labelledby="fq" style="max-width: 780px; margin: 0 auto; padding-left: 32px; padding-right: 32px">
 <h2 id="fq" class="lp-h2" style="margin: 0 0 28px; font-size: 44px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em; text-align: center">{{t.faqH}}</h2>
 <div style="border-top: 1px solid #E2EAE5">
-<sc-for list="{{faq}}" as="f" hint-placeholder-count="5">
+<sc-for list="{{faq}}" as="f" hint-placeholder-count="7">
 <div style="border-bottom: 1px solid #E2EAE5">
 <button aria-expanded="{{f.open}}" onClick="{{f.toggle}}" style="width: 100%; display: flex; align-items: center; gap: 16px; min-height: 68px; padding: 0 4px; border: 0; background: transparent; font: inherit; font-size: 17px; font-weight: 600; text-align: left; color: #15201B"><span style="flex: 1">{{f.q}}</span><span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 15px; background: #F1F5F2; display: grid; place-items: center; font-size: 18px; color: #0F7A4F">{{f.sign}}</span></button>
 <sc-if value="{{f.isOpen}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 0 50px 22px 4px; font-size: 16px; line-height: 1.65; color: #4A5650">{{f.a}}</p></sc-if>
@@ -323,12 +341,12 @@ a{color:#0F7A4F}a:hover{color:#0B5D3B}
 
 <footer style="border-top: 1px solid #E8EEEA">
 <div class="lp-foot lp-wrap" style="padding-top: 56px; padding-bottom: 28px; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; font-size: 14px">
-<div style="display: flex; flex-direction: column; gap: 12px"><div style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 17px">RoomPilot</b></div><span style="color: #6B7770; line-height: 1.6; max-width: 280px">{{t.footAbout}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><div style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 9px; background: #0F7A4F; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3zM9 20v-6h6v6"></path></svg></span><b style="font-size: 17px">Nestvo</b></div><span style="color: #6B7770; line-height: 1.6; max-width: 280px">{{t.footAbout}}</span></div>
 <sc-for list="{{footCols}}" as="c" hint-placeholder-count="3">
 <nav aria-label="{{c.h}}" style="display: flex; flex-direction: column; gap: 10px"><b style="font-size: 13px; color: #15201B">{{c.h}}</b><sc-for list="{{c.links}}" as="l" hint-placeholder-count="3"><a href="{{l.href}}" style="color: #6B7770; text-decoration: none">{{l.l}}</a></sc-for></nav>
 </sc-for>
 </div>
-<div class="lp-wrap" style="padding-top: 18px; padding-bottom: 28px; border-top: 1px solid #EEF2EF; display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #8A938E"><span>© 2026 RoomPilot</span><span>{{t.terms}}</span><span>{{t.privacy}}</span><span style="margin-left: auto">{{t.demoData}}</span></div>
+<div class="lp-wrap" style="padding-top: 18px; padding-bottom: 28px; border-top: 1px solid #EEF2EF; display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #8A938E"><span>© 2026 Nestvo</span><span>{{t.terms}}</span><span>{{t.privacy}}</span><span style="margin-left: auto">{{t.demoData}}</span></div>
 </footer>
 
 <sc-if value="{{demoOpen}}" hint-placeholder-val="{{ false }}">
@@ -373,12 +391,12 @@ class Component extends DCLogic {
     function L(e, k) { return km ? k : e; }
     var T = {
       signIn: L('Sign in', 'ចូល'), book: L('Book a demo', 'កក់ការបង្ហាញ'), tryDemo: L('Try the live demo', 'សាកល្បងផ្ទាល់'), badge: L('Cambodia', 'កម្ពុជា'), eyebrow: L('Khmer & English · Riel & USD · KHQR', 'ខ្មែរ និង English · រៀល និង ដុល្លារ · KHQR'),
-      h1a: L('Find a room. Rent it.', 'រកបន្ទប់។ ជួលបន្ទប់។'), h1b: L('Manage it in one app.', 'គ្រប់គ្រងវាក្នុងកម្មវិធីតែមួយ។'), journeyLabel: L('From exploring a room to paying rent', 'ពីការស្វែងរកបន្ទប់ ដល់ការបង់ថ្លៃជួល'),
-      lead: L('Owners fill rooms, send bills on Telegram in 10 minutes and see every KHQR payment. Renters find verified rooms and pay in two taps.', 'ម្ចាស់ផ្ទះជួលបន្ទប់ពេញ ផ្ញើវិក្កយបត្រតាម Telegram ក្នុង ១០ នាទី និងឃើញរាល់ការបង់ KHQR។ អ្នកជួលរកបន្ទប់ដែលបានផ្ទៀងផ្ទាត់ ហើយបង់ប្រាក់ដោយចុចតែពីរដង។'),
+      h1a: L('Manage every room.', 'គ្រប់គ្រងគ្រប់បន្ទប់។'), h1b: L('Get paid on time.', 'ទទួលប្រាក់ទាន់ពេល។'), journeyLabel: L('From exploring a room to paying rent', 'ពីការស្វែងរកបន្ទប់ ដល់ការបង់ថ្លៃជួល'),
+      lead: L('See every room, bill and payment in one dashboard. Send bills on Telegram in 10 minutes — tenants pay by KHQR from their phone.', 'មើលគ្រប់បន្ទប់ វិក្កយបត្រ និងការបង់ប្រាក់ក្នុងផ្ទាំងតែមួយ។ ផ្ញើវិក្កយបត្រតាម Telegram ក្នុង ១០ នាទី — អ្នកជួលបង់តាម KHQR ពីទូរស័ព្ទ។'),
       paidBadge: L('28 of 30 tenants paid · day 3', 'អ្នកជួល ២៨/៣០ បានបង់ · ថ្ងៃទី ៣'), forOwners: L('Room owner', 'ម្ចាស់បន្ទប់'), forRenters: L('Renter', 'អ្នកជួល'), collectedOf: L('of $10,448 collected', 'ប្រមូលបានពី $10,448'), verified: L('Verified', 'ផ្ទៀងផ្ទាត់'), roomName: L('Studio A-106', 'ស្ទូឌីយោ A-106'), roomArea: L('Toul Kork · 14 min to work', 'ទួលគោក · ១៤ នាទីទៅការងារ'), allIn: L('/mo all-in', '/ខែ សរុប'), rentLine: L('Rent $200', 'ជួល $200'), billsLine: L('Bills ~$46', 'ទឹកភ្លើង ~$46'), bookView: L('Book a free viewing', 'កក់មើលបន្ទប់ឥតគិតថ្លៃ'),
       tnRoom: L('Room A-201 · Sokha Residence', 'បន្ទប់ A-201 · Sokha Residence'), tnHi: L('Hi, Sreymom', 'សួស្តី ស្រីមុំ'), tnOverview: L('Overview', 'ទិដ្ឋភាពទូទៅ'), tnBills: L('Bills', 'វិក្កយបត្រ'), tnServices: L('Services', 'សេវា'), tnLeft: L('Left to pay for October', 'នៅសល់ត្រូវបង់ខែតុលា'), tnDue: L('≈ ៛593,024 · due Thu 5 Nov', '≈ ៛593,024 · ផុតកំណត់ ៥ វិច្ឆិកា'), tnPay: L('Pay now', 'បង់ឥឡូវ'), tnRemind: L('Remind me on Telegram · Mon 2 Nov', 'រំលឹកតាម Telegram · ច័ន្ទ ២ វិច្ឆិកា'), tnUsage: L('Your usage vs September', 'ការប្រើប្រាស់ធៀបខែកញ្ញា'),
-      mockTitle: L('October · Sokha Residence', 'ខែតុលា · Sokha Residence'), bot: 'RoomPilot Bot', billOf: L('October bill · A-201', 'វិក្កយបត្រខែតុលា · A-201'), payKhqr: L('Pay with KHQR', 'បង់តាម KHQR'),
-      whyEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), ownNote: L('Free setup · we import your Excel', 'រៀបចំឥតគិតថ្លៃ · យើងនាំចូល Excel ជូន'), whyH: L('Manage all your rooms from one screen', 'គ្រប់គ្រងបន្ទប់ទាំងអស់ពីអេក្រង់តែមួយ'), myProps: L('My properties', 'អគាររបស់ខ្ញុំ'), ownLead: L('Whether you rent 5 rooms or 500, RoomPilot shows every property, room and payment in one place — on your phone or computer.', 'ទោះបីអ្នកជួល ៥ ឬ ៥០០ បន្ទប់ RoomPilot បង្ហាញគ្រប់អគារ បន្ទប់ និងការបង់ប្រាក់នៅកន្លែងតែមួយ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'),
+      mockTitle: L('October · Sokha Residence', 'ខែតុលា · Sokha Residence'), bot: 'Nestvo Bot', billOf: L('October bill · A-201', 'វិក្កយបត្រខែតុលា · A-201'), payKhqr: L('Pay with KHQR', 'បង់តាម KHQR'),
+      whyEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), ownNote: L('Free setup · we import your Excel', 'រៀបចំឥតគិតថ្លៃ · យើងនាំចូល Excel ជូន'), whyH: L('Manage all your rooms from one screen', 'គ្រប់គ្រងបន្ទប់ទាំងអស់ពីអេក្រង់តែមួយ'), myProps: L('My properties', 'អគាររបស់ខ្ញុំ'), ownLead: L('Whether you rent 5 rooms or 500, Nestvo shows every property, room and payment in one place — on your phone or computer.', 'ទោះបីអ្នកជួល ៥ ឬ ៥០០ បន្ទប់ Nestvo បង្ហាញគ្រប់អគារ បន្ទប់ និងការបង់ប្រាក់នៅកន្លែងតែមួយ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'),
       howEyebrow: L('HOW IT WORKS', 'របៀបដំណើរការ'), howH: L('A simple flow for everyone', 'ជំហានសាមញ្ញសម្រាប់អ្នកទាំងអស់គ្នា'), openDemo: L('Open in demo', 'បើកក្នុងការបង្ហាញ'), prev: L('Previous step', 'ជំហានមុន'),
       rentEyebrow: L('FOR RENTERS', 'សម្រាប់អ្នកជួល'), rentH: L('Explore rooms for rent. See the real price.', 'ស្វែងរកបន្ទប់ជួល។ ឃើញតម្លៃពិត។'),
       rentSub: L('Search properties and rooms by area and budget, see what you will really pay each month, and book a free viewing in two taps.', 'ស្វែងរកអគារ និងបន្ទប់តាមតំបន់ និងថវិកា មើលតម្លៃពិតដែលត្រូវបង់ប្រចាំខែ ហើយកក់មើលបន្ទប់ឥតគិតថ្លៃត្រឹមពីរដង។'),
@@ -387,8 +405,8 @@ class Component extends DCLogic {
       tabExplore: L('Explore', 'ស្វែងរក'), tabSaved: L('Saved', 'រក្សាទុក'), tabEnq: L('Enquiries', 'ការសាកសួរ'), tabHome: L('My home', 'ផ្ទះខ្ញុំ'),
       priceEyebrow: L('PRICING', 'តម្លៃ'), priceH: L('Simple pricing, per room', 'តម្លៃសាមញ្ញ គិតតាមបន្ទប់'), popular: L('Most popular', 'ពេញនិយមបំផុត'), priceNote: L('Sample pricing for the demo — confirm before launch.', 'តម្លៃគំរូសម្រាប់ការបង្ហាញ — សូមបញ្ជាក់មុនដាក់ឱ្យប្រើ។'),
       faqH: L('Common questions', 'សំណួរញឹកញាប់'),
-      chipBill: L('October bill sent', 'បានផ្ញើវិក្កយបត្រខែតុលា'), chipBillSub: L('Telegram · Khmer & English', 'Telegram · ខ្មែរ និង English'), chipPaid: L('$100 paid by KHQR', 'បានបង់ $100 តាម KHQR'), chipPaidSub: L('Receipt RC-1188 sent', 'បានផ្ញើបង្កាន់ដៃ RC-1188'), heroOcc: L('15 of 16 rented', 'ជួលរួច ១៥/១៦'), lgPaid: L('Paid', 'បានបង់'), lgDue: L('Due', 'ត្រូវបង់'), lgFree: L('Free', 'ទំនេរ'), heroFree: L('3 free rooms nearby', 'បន្ទប់ទំនេរ ៣ ក្បែរអ្នក'), heroFreeSub: L('Toul Kork · verified', 'ទួលគោក · បានផ្ទៀងផ្ទាត់'), dDate: L('Friday, 30 October', 'សុក្រ ៣០ តុលា'), dHello: L('Good morning, Sokha', 'អរុណសួស្តី Sokha'), dAll: L('All properties', 'អគារទាំងអស់'), dRun: L('Run billing', 'ចេញវិក្កយបត្រ'), dIncome: L('Income', 'ចំណូល'), dSixMo: L('Last 6 months', '៦ ខែចុងក្រោយ'), dAttn: L('Needs attention', 'ត្រូវយកចិត្តទុកដាក់'), ctaH: L('See RoomPilot with your own building', 'មើល RoomPilot ជាមួយអគាររបស់អ្នកផ្ទាល់'), featEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), featH: L('Everything you need to run your rooms', 'អ្វីៗទាំងអស់ដែលអ្នកត្រូវការ ដើម្បីគ្រប់គ្រងបន្ទប់ជួល'), featSub: L('From 5 rooms to 500 — on your phone or computer.', 'ពី ៥ បន្ទប់ ដល់ ៥០០ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'), billEyebrow: L('BILLING DAY', 'ថ្ងៃចេញវិក្កយបត្រ'), billH: L('Bills out in 10 minutes. Paid in days.', 'វិក្កយបត្រចេញក្នុង ១០ នាទី។ ប្រាក់ចូលក្នុងប៉ុន្មានថ្ងៃ។'), lookRoom: L('Looking for a room?', 'កំពុងរកបន្ទប់ជួលមែនទេ?'), before: L('BEFORE', 'មុន'), after: L('WITH ROOMPILOT', 'ជាមួយ ROOMPILOT'), ctaSub: L('30-minute demo · we import your rooms and tenants for free', 'ការបង្ហាញ ៣០ នាទី · យើងនាំចូលបន្ទប់ និងអ្នកជួលរបស់អ្នកដោយឥតគិតថ្លៃ'), tg: L('Chat on Telegram', 'ជជែកតាម Telegram'),
-      footAbout: L('Find, rent and manage rooms in Cambodia — for room owners, renters and tenants.', 'ស្វែងរក ជួល និងគ្រប់គ្រងបន្ទប់នៅកម្ពុជា — សម្រាប់ម្ចាស់បន្ទប់ អ្នកស្វែងរកបន្ទប់ និងអ្នកជួល។'), terms: L('Terms', 'លក្ខខណ្ឌ'), privacy: L('Privacy', 'ឯកជនភាព'), demoData: L('All names and numbers are demo data', 'ឈ្មោះ និងលេខទាំងអស់ជាទិន្នន័យសាកល្បង'),
+      chipBill: L('October bill sent', 'បានផ្ញើវិក្កយបត្រខែតុលា'), chipBillSub: L('Telegram · Khmer & English', 'Telegram · ខ្មែរ និង English'), chipPaid: L('$100 paid by KHQR', 'បានបង់ $100 តាម KHQR'), chipPaidSub: L('Receipt RC-1188 sent', 'បានផ្ញើបង្កាន់ដៃ RC-1188'), heroOcc: L('15 of 16 rented', 'ជួលរួច ១៥/១៦'), lgPaid: L('Paid', 'បានបង់'), lgDue: L('Due', 'ត្រូវបង់'), lgFree: L('Free', 'ទំនេរ'), heroFree: L('3 free rooms nearby', 'បន្ទប់ទំនេរ ៣ ក្បែរអ្នក'), heroFreeSub: L('Toul Kork · verified', 'ទួលគោក · បានផ្ទៀងផ្ទាត់'), dDate: L('Tuesday, 27 October', 'អង្គារ ២៧ តុលា'), dHello: L('Good morning, Dara', 'អរុណសួស្តី Dara'), dAll: L('All properties', 'អគារទាំងអស់'), dRun: L('Run billing', 'ចេញវិក្កយបត្រ'), dIncome: L('Income', 'ចំណូល'), dSixMo: L('Last 6 months', '៦ ខែចុងក្រោយ'), dAttn: L('Needs attention', 'ត្រូវយកចិត្តទុកដាក់'), ctaH: L('See Nestvo with your own building', 'មើល Nestvo ជាមួយអគាររបស់អ្នកផ្ទាល់'), featEyebrow: L('FOR ROOM OWNERS', 'សម្រាប់ម្ចាស់បន្ទប់ជួល'), featH: L('Everything you need to run your rooms', 'អ្វីៗទាំងអស់ដែលអ្នកត្រូវការ ដើម្បីគ្រប់គ្រងបន្ទប់ជួល'), featSub: L('From 5 rooms to 500 — on your phone or computer.', 'ពី ៥ បន្ទប់ ដល់ ៥០០ — លើទូរស័ព្ទ ឬកុំព្យូទ័រ។'), billEyebrow: L('BILLING DAY', 'ថ្ងៃចេញវិក្កយបត្រ'), billH: L('Bills out in 10 minutes. Paid in days.', 'វិក្កយបត្រចេញក្នុង ១០ នាទី។ ប្រាក់ចូលក្នុងប៉ុន្មានថ្ងៃ។'), lookRoom: L('Looking for a room?', 'កំពុងរកបន្ទប់ជួលមែនទេ?'), before: L('BEFORE', 'មុន'), after: L('WITH NESTVO', 'ជាមួយ NESTVO'), ctaSub: L('30-minute demo · we import your rooms and tenants for free', 'ការបង្ហាញ ៣០ នាទី · យើងនាំចូលបន្ទប់ និងអ្នកជួលរបស់អ្នកដោយឥតគិតថ្លៃ'), tg: L('Chat on Telegram', 'ជជែកតាម Telegram'),
+      footAbout: L('Manage every room and get paid on time — made for Cambodia.', 'គ្រប់គ្រងគ្រប់បន្ទប់ និងទទួលប្រាក់ទាន់ពេល — បង្កើតសម្រាប់កម្ពុជា។'), oaTag: L('OWNER PHONE APP', 'កម្មវិធីទូរស័ព្ទម្ចាស់ផ្ទះ'), oaH: L('Run your rooms from your phone', 'គ្រប់គ្រងបន្ទប់ពីទូរស័ព្ទរបស់អ្នក'), oaSub: L('No computer needed. Everything in the dashboard is in your pocket too.', 'មិនចាំបាច់មានកុំព្យូទ័រ។ អ្វីៗក្នុងផ្ទាំងគ្រប់គ្រងក៏មាននៅក្នុងហោប៉ៅរបស់អ្នកដែរ។'), priceFoot: L('Prices in USD · pay by KHQR or bank transfer · cancel any time', 'តម្លៃជាដុល្លារ · បង់តាម KHQR ឬផ្ទេរប្រាក់តាមធនាគារ · បោះបង់បានគ្រប់ពេល'), terms: L('Terms', 'លក្ខខណ្ឌ'), privacy: L('Privacy', 'ឯកជនភាព'), demoData: L('All names and numbers are demo data', 'ឈ្មោះ និងលេខទាំងអស់ជាទិន្នន័យសាកល្បង'),
       fName: L('Your name', 'ឈ្មោះរបស់អ្នក'), fPhone: L('Phone / Telegram', 'ទូរស័ព្ទ / Telegram'), fRooms: L('Rooms you manage', 'ចំនួនបន្ទប់ដែលអ្នកគ្រប់គ្រង'), fTime: L('Demo time', 'ពេលវេលាបង្ហាញ'),
       review: L('Review', 'ពិនិត្យ'), edit: L('Edit', 'កែប្រែ'), yesBook: L('Yes, book my demo', 'បាទ/ចាស កក់ការបង្ហាញ'), booked: L('Demo booked', 'បានកក់ការបង្ហាញ'),
       bookedSub: L('We\'ll confirm on Telegram. Meanwhile, click around the live demo.', 'យើងនឹងបញ្ជាក់តាម Telegram។ ក្នុងពេលនេះ សាកល្បងការបង្ហាញផ្ទាល់សិន។'), openLive: L('Open live demo', 'បើកការបង្ហាញផ្ទាល់'), close: L('Close', 'បិទ')
@@ -448,18 +466,20 @@ class Component extends DCLogic {
     var FAQ = [
       [L('Do my tenants need to install anything?', 'តើអ្នកជួលត្រូវដំឡើងកម្មវិធីអ្វីទេ?'), L('No. Tenants link their Telegram once with the last 4 digits of their phone number. Renters looking for rooms can use the website or the guest app.', 'ទេ។ អ្នកជួលភ្ជាប់ Telegram តែម្តង ដោយប្រើលេខ ៤ ខ្ទង់ចុងក្រោយនៃទូរស័ព្ទ។ អ្នកស្វែងរកបន្ទប់អាចប្រើគេហទំព័រ ឬកម្មវិធីភ្ញៀវ។')],
       [L('Can I bill in riel and dollars?', 'តើអាចចេញវិក្កយបត្រជារៀល និងដុល្លារបានទេ?'), L('Yes. Set electricity in riel, water and rent in dollars, and your own exchange rate. Bills show both.', 'បាន។ កំណត់អគ្គិសនីជារៀល ទឹក និងថ្លៃជួលជាដុល្លារ និងអត្រាប្តូរប្រាក់ផ្ទាល់ខ្លួន។ វិក្កយបត្របង្ហាញទាំងពីរ។')],
-      [L('Who holds the money?', 'តើនរណាជាអ្នកកាន់ប្រាក់?'), L('You do. Tenants pay into your own KHQR or bank account. RoomPilot only matches payments to bills.', 'អ្នកផ្ទាល់។ អ្នកជួលបង់ចូល KHQR ឬគណនីធនាគាររបស់អ្នក។ RoomPilot គ្រាន់តែផ្គូផ្គងការបង់ប្រាក់ទៅនឹងវិក្កយបត្រ។')],
+      [L('Who holds the money?', 'តើនរណាជាអ្នកកាន់ប្រាក់?'), L('You do. Tenants pay into your own KHQR or bank account. Nestvo only matches payments to bills.', 'អ្នកផ្ទាល់។ អ្នកជួលបង់ចូល KHQR ឬគណនីធនាគាររបស់អ្នក។ Nestvo គ្រាន់តែផ្គូផ្គងការបង់ប្រាក់ទៅនឹងវិក្កយបត្រ។')],
       [L('Is it free for renters?', 'តើឥតគិតថ្លៃសម្រាប់អ្នកជួលទេ?'), L('Yes. Exploring rooms, booking viewings and paying bills are always free for renters and tenants.', 'បាទ/ចាស។ ការស្វែងរកបន្ទប់ កក់មើលបន្ទប់ និងបង់វិក្កយបត្រ គឺឥតគិតថ្លៃជានិច្ចសម្រាប់អ្នកជួល។')],
-      [L('Can you move my data from Excel?', 'តើអាចផ្ទេរទិន្នន័យពី Excel បានទេ?'), L('Yes — send us your room list and tenants and we import them for free during setup.', 'បាន — ផ្ញើបញ្ជីបន្ទប់ និងអ្នកជួលមកយើង យើងនាំចូលជូនឥតគិតថ្លៃពេលរៀបចំ។')]
+      [L('Can you move my data from Excel?', 'តើអាចផ្ទេរទិន្នន័យពី Excel បានទេ?'), L('Yes — send us your room list and tenants and we import them for free during setup.', 'បាន — ផ្ញើបញ្ជីបន្ទប់ និងអ្នកជួលមកយើង យើងនាំចូលជូនឥតគិតថ្លៃពេលរៀបចំ។')],
+      [L('Is my data safe?', 'តើទិន្នន័យរបស់ខ្ញុំមានសុវត្ថិភាពទេ?'), L('Yes. Only you and the team members you invite can see tenant details and money. Every change is logged, and your data is backed up every day.', 'បាទ/ចាស។ មានតែអ្នក និងសមាជិកក្រុមដែលអ្នកអញ្ជើញទេ ដែលអាចមើលព័ត៌មានអ្នកជួល និងប្រាក់។ រាល់ការផ្លាស់ប្តូរត្រូវបានកត់ត្រា ហើយទិន្នន័យត្រូវបានបម្រុងទុករៀងរាល់ថ្ងៃ។')],
+      [L('What if the internet is down?', 'បើគ្មានអ៊ីនធឺណិតត្រូវធ្វើយ៉ាងម៉េច?'), L('Caretakers can keep taking meter photos offline — they upload by themselves when the phone is back online. Tenants can still pay with the KHQR on their last bill.', 'អ្នកថែទាំអាចបន្តថតរូបកុងទ័រពេលគ្មានអ៊ីនធឺណិត — រូបថតនឹងបញ្ជូនដោយខ្លួនឯងពេលមានអ៊ីនធឺណិតវិញ។ អ្នកជួលនៅតែអាចបង់តាម KHQR លើវិក្កយបត្រចុងក្រោយ។')]
     ];
     function plan(n, price, unit, d, pts, cta, pop) {
       return { n: n, price: price, unit: unit, d: d, cta: cta, pop: pop, pts: pts.map(function (l) { return { l: l }; }),
         bg: pop ? '#0B4F38' : '#FFFFFF', fg: pop ? '#FFFFFF' : '#15201B', sub: pop ? '#BFE0D0' : '#6B7770', bd: pop ? '#0B4F38' : '#E2EAE5', line: pop ? '#1E6448' : '#EEF2EF', check: pop ? '#8FDDB5' : '#0F7A4F', cbg: '#FFFFFF', cfg: pop ? '#0B4F38' : '#15201B', cbd: pop ? '#FFFFFF' : '#D5DDD8' };
     }
 
-    var OP = st.op || 'all', OR = st.or || 'B-112';
-    var ROOMST = { 'A-106': 'free', 'B-108': 'free', 'R-207': 'free', 'B-112': 'over', 'R-204': 'over', 'A-201': 'part', 'A-104': 'sent', 'A-207': 'sent', 'B-103': 'sent', 'R-211': 'sent', 'R-202': 'part' };
-    var WHO = { 'A-106': L('Studio · 22 m² · $200', 'ស្ទូឌីយោ · 22 m² · $200'), 'B-108': L('1-bed · 30 m² · $240', 'បន្ទប់គេង ១ · 30 m² · $240'), 'R-207': L('1-bed · 34 m² · $230', 'បន្ទប់គេង ១ · 34 m² · $230'), 'B-112': 'Mao Rina', 'R-204': 'Keo Vibol', 'A-201': 'Chan Sreymom', 'R-202': 'Sok Dara' };
+    var OP = st.op || 'all', OR = st.or || 'C-405';
+    var ROOMST = { 'A-106': 'free', 'B-108': 'free', 'R-207': 'free', 'C-405': 'over', 'R-204': 'over', 'A-201': 'part', 'A-104': 'sent', 'A-207': 'sent', 'B-103': 'sent', 'R-211': 'sent', 'R-202': 'part' };
+    var WHO = { 'A-106': L('Studio · 22 m² · $200', 'ស្ទូឌីយោ · 22 m² · $200'), 'B-108': L('1-bed · 30 m² · $240', 'បន្ទប់គេង ១ · 30 m² · $240'), 'R-207': L('1-bed · 34 m² · $230', 'បន្ទប់គេង ១ · 34 m² · $230'), 'C-405': 'Mao Rina', 'R-204': 'Keo Vibol', 'A-201': 'Chan Sreymom', 'R-202': 'Sok Dara' };
     var STY = {
       paid: { bg: '#DCEFE5', fg: '#0B5D3B', bd: '1px solid #C2E2D1', l: L('Paid', 'បានបង់'), sbg: '#EEF7F2', sfg: '#0B5D3B', act: L('View receipt', 'មើលបង្កាន់ដៃ') },
       sent: { bg: '#E3ECF8', fg: '#1F5FA8', bd: '1px solid #CCDBEF', l: L('Bill sent', 'បានផ្ញើវិក្កយបត្រ'), sbg: '#EEF3FB', sfg: '#1F5FA8', act: L('View bill', 'មើលវិក្កយបត្រ') },
@@ -481,7 +501,7 @@ class Component extends DCLogic {
     var overN = allR.filter(function (r) { return stOf(r) === 'over'; }).length;
     var selS = STY[stOf(OR)];
     var selSt = stOf(OR);
-    var selLine = selS.l + (selSt === 'over' ? L(' · $78.10 · 8 days late', ' · $78.10 · យឺត ៨ ថ្ងៃ') : selSt === 'part' ? (OR === 'A-201' ? L(' · $144.64 left', ' · នៅសល់ $144.64') : L(' · $60.00 left', ' · នៅសល់ $60.00')) : selSt === 'free' ? L(' · ready to rent', ' · អាចជួលបាន') : selSt === 'sent' ? L(' · due Thu 5 Nov', ' · ផុតកំណត់ ៥ វិច្ឆិកា') : L(' · October · paid by KHQR', ' · ខែតុលា · បង់តាម KHQR'));
+    var selLine = selS.l + (selSt === 'over' ? L(' · $78.10 · 7 days late', ' · $78.10 · យឺត ៧ ថ្ងៃ') : selSt === 'part' ? (OR === 'A-201' ? L(' · $144.64 left', ' · នៅសល់ $144.64') : L(' · $60.00 left', ' · នៅសល់ $60.00')) : selSt === 'free' ? L(' · ready to rent', ' · អាចជួលបាន') : selSt === 'sent' ? L(' · due Thu 5 Nov', ' · ផុតកំណត់ ៥ វិច្ឆិកា') : L(' · October · paid by KHQR', ' · ខែតុលា · បង់តាម KHQR'));
     var NAMES = ['Sok Pisey', 'Chea Dara', 'Heng Sophea', 'Lim Vanna', 'Pich Sreynich', 'Ouk Ratha', 'Seng Malis', 'Tep Sovann', 'Nhem Bopha', 'Kong Visal', 'Yim Channa', 'Ros Leakhena', 'Phan Sokun', 'Meas Kosal'];
     var PATHS = [
         { owner: true, path: IC.home, k: L('ROOM OWNERS', 'ម្ចាស់បន្ទប់ជួល'), h: L('Manage rooms & get paid', 'គ្រប់គ្រងបន្ទប់ និងទទួលប្រាក់'), pts: [L('All properties & rooms in one screen', 'អគារ និងបន្ទប់ទាំងអស់ក្នុងអេក្រង់តែមួយ'), L('Bills on Telegram in 10 min', 'វិក្កយបត្រតាម Telegram ក្នុង ១០ នាទី'), L('See who paid instantly', 'ដឹងភ្លាមថាអ្នកណាបានបង់')], cta: L('Book a demo', 'កក់ការបង្ហាញ') },
@@ -523,24 +543,25 @@ class Component extends DCLogic {
         { path: IC.chart, t: L('Reports for your accountant', 'របាយការណ៍សម្រាប់គណនេយ្យករ'), d: L('Income, unpaid bills and occupancy by property and month. Export any time.', 'ចំណូល វិក្កយបត្រមិនទាន់បង់ និងអត្រាជួល តាមអគារ និងខែ។ នាំចេញបានគ្រប់ពេល។') }
       ],
       steps3: [
-        { n: '01', t: L('Snap the meters', 'ថតកុងទ័រ'), d: L('Your caretaker photographs each meter. RoomPilot reads the number and flags anything odd.', 'អ្នកថែទាំថតកុងទ័រនីមួយៗ។ RoomPilot អានលេខ ហើយបង្ហាញលេខណាដែលមិនប្រក្រតី។'), tag: L('About 20 seconds a room', 'ប្រហែល ២០ វិនាទី ក្នុងមួយបន្ទប់') },
+        { n: '01', t: L('Snap the meters', 'ថតកុងទ័រ'), d: L('Your caretaker photographs each meter. Nestvo reads the number and flags anything odd.', 'អ្នកថែទាំថតកុងទ័រនីមួយៗ។ Nestvo អានលេខ ហើយបង្ហាញលេខណាដែលមិនប្រក្រតី។'), tag: L('About 20 seconds a room', 'ប្រហែល ២០ វិនាទី ក្នុងមួយបន្ទប់') },
         { n: '02', t: L('Check and send', 'ពិនិត្យ និងផ្ញើ'), d: L('Rent, utilities, parking and arrears are added up. One click sends every bill on Telegram.', 'ថ្លៃជួល ទឹកភ្លើង ចំណត និងប្រាក់ជំពាក់ត្រូវបូកសរុប។ ចុចម្តងផ្ញើវិក្កយបត្រទាំងអស់តាម Telegram។'), tag: L('46 bills in 10 minutes', '៤៦ វិក្កយបត្រ ក្នុង ១០ នាទី') },
         { n: '03', t: L('Get paid', 'ទទួលប្រាក់'), d: L('Tenants pay by KHQR from any bank. Payments match themselves and receipts go out.', 'អ្នកជួលបង់តាម KHQR ពីធនាគារណាមួយ។ ការបង់ប្រាក់ផ្គូផ្គងដោយខ្លួនឯង ហើយបង្កាន់ដៃត្រូវផ្ញើចេញ។'), tag: L('28 of 30 paid by day 3', 'បានបង់ ២៨/៣០ ត្រឹមថ្ងៃទី ៣') }
       ],
       dashNav: [[IC.chart, 1], [IC.home, 0], [IC.bill, 0], [IC.pay, 0], [IC.fix, 0]].map(function (n) { return { path: n[0], bg: n[1] ? '#13704F' : 'transparent', c: n[1] ? '#FFFFFF' : '#8FC9AE' }; }),
       dashKpi: [
         { l: L('Collected', 'ប្រមូលបាន'), v: '$9,412', c: '#0B5D3B', d: L('▲ 6% vs Sep', '▲ ៦% ធៀបខែកញ្ញា'), dc: '#1C7A43' },
-        { l: L('To collect', 'នៅត្រូវប្រមូល'), v: '$1,036', c: '#A86A00', d: L('16 bills', '១៦ វិក្កយបត្រ'), dc: '#6B7770' },
+        { l: L('To collect', 'នៅត្រូវប្រមូល'), v: '$1,036', c: '#A86A00', d: L('6 bills', '៦ វិក្កយបត្រ'), dc: '#6B7770' },
         { l: L('Occupancy', 'អត្រាជួល'), v: '94%', c: '#15201B', d: L('45/48 rooms', '៤៥/៤៨ បន្ទប់'), dc: '#6B7770' },
         { l: L('Overdue', 'ហួសកំណត់'), v: '2', c: '#9A2A1E', d: '$156.20', dc: '#9A2A1E' }
       ],
       dashBars: [['May', 'ឧសភា', 7.9, 70], ['Jun', 'មិថុនា', 8.2, 74], ['Jul', 'កក្កដា', 8.4, 77], ['Aug', 'សីហា', 8.6, 80], ['Sep', 'កញ្ញា', 8.9, 84], ['Oct', 'តុលា', 9.4, 92]].map(function (b, i) { return { m: L(b[0], b[1]), v: '$' + b[2] + 'k', h: b[3] + '%', c: i === 5 ? '#0F7A4F' : '#CFE7DA' }; }),
       dashAttn: [
-        { c: '#B42318', t: L('B-112 overdue', 'B-112 ហួសកំណត់'), d: L('$78.10 · 8 days late', '$78.10 · យឺត ៨ ថ្ងៃ') },
+        { c: '#B42318', t: L('C-405 overdue', 'C-405 ហួសកំណត់'), d: L('$78.10 · 7 days late', '$78.10 · យឺត ៧ ថ្ងៃ') },
         { c: '#A86A00', t: L('2 readings to check', 'លេខកុងទ័រ ២ ត្រូវពិនិត្យ'), d: L('R-205 · R-106', 'R-205 · R-106') },
         { c: '#1F5FA8', t: L('Viewing Sat 10:00', 'មើលបន្ទប់ សៅរ៍ ១០:០០'), d: L('A-106 · Kim Sovanna', 'A-106 · Kim Sovanna') }
       ],
-      dashInv: [['A-201', 'Chan Sreymom', '$244.64', 'part'], ['A-202', 'Tep Sovann', '$231.10', 'paid'], ['R-204', 'Keo Vibol', '$78.10', 'over']].map(function (r, i) { var m = { part: [L('PART PAID', 'បង់ខ្លះ'), '#FDF0D5', '#7A4B00'], paid: [L('PAID', 'បានបង់'), '#DCEFE5', '#0B5D3B'], over: [L('OVERDUE', 'ហួសកំណត់'), '#FBE4E1', '#9A2A1E'] }[r[3]]; return { room: r[0], who: r[1], amt: r[2], st: m[0], bg: m[1], fg: m[2], bb: i < 2 ? '1px solid #F0F4F1' : '0' }; }),
+      dashInv: [['A-201', 'Chan Sreymom', '$244.64', 'part'], ['A-202', 'Ly Sreyneang', '$231.10', 'paid'], ['R-204', 'Keo Vibol', '$78.10', 'over']].map(function (r, i) { var m = { part: [L('PART PAID', 'បង់ខ្លះ'), '#FDF0D5', '#7A4B00'], paid: [L('PAID', 'បានបង់'), '#DCEFE5', '#0B5D3B'], over: [L('OVERDUE', 'ហួសកំណត់'), '#FBE4E1', '#9A2A1E'] }[r[3]]; return { room: r[0], who: r[1], amt: r[2], st: m[0], bg: m[1], fg: m[2], bb: i < 2 ? '1px solid #F0F4F1' : '0' }; }),
+      oaPts: [[L('See who paid', 'មើលអ្នកដែលបានបង់'), L('— paid, part paid and overdue at a glance', '— បានបង់ បង់ខ្លះ និងហួសកំណត់ មើលភ្លាមៗ')], [L('Send bills', 'ផ្ញើវិក្កយបត្រ'), L('— check flagged readings, then send on Telegram', '— ពិនិត្យលេខដែលមានបញ្ហា រួចផ្ញើតាម Telegram')], [L('Every room', 'គ្រប់បន្ទប់'), L('— tap a room to remind, share or message', '— ចុចបន្ទប់ដើម្បីរំលឹក ចែករំលែក ឬផ្ញើសារ')], [L('Record cash', 'កត់ត្រាសាច់ប្រាក់'), L('— the tenant gets a receipt on Telegram', '— អ្នកជួលទទួលបង្កាន់ដៃតាម Telegram')]].map(function (x) { return { t: x[0], d: x[1] }; }),
       ticks: [L('Free setup', 'រៀបចំឥតគិតថ្លៃ'), L('We import your Excel', 'យើងនាំចូល Excel ជូន'), L('Free for renters & tenants', 'ឥតគិតថ្លៃសម្រាប់អ្នកជួល')].map(function (l) { return { l: l }; }),
       heroMini: ['p','p','p','p','p','f','p','p','d','p','p','p','p','p','d','p'].map(function (k) { return { bg: k === 'p' ? '#8FDDB5' : k === 'd' ? '#F0B969' : 'transparent', bd: k === 'f' ? '1px dashed #CDEBDD' : '0' }; }),
       paths: PATHS, pathsA: [PATHS[0]], pathsB: [PATHS[1]],
@@ -584,14 +605,14 @@ class Component extends DCLogic {
       periods: [['m', L('Monthly', 'ប្រចាំខែ')], ['y', L('Yearly · save 20%', 'ប្រចាំឆ្នាំ · សន្សំ ២០%')]].map(function (p) { var on = (p[0] === 'y') === yearly; return { l: p[1], sel: on ? 'true' : 'false', bg: on ? '#15201B' : 'transparent', fg: on ? '#FFFFFF' : '#4A5650', pick: function () { self.setState({ yearly: p[0] === 'y' }); } }; }),
       plans: [
         plan(L('Starter', 'ចាប់ផ្តើម'), '$0', L('up to 15 rooms', 'រហូតដល់ ១៥ បន្ទប់'), L('For a small boarding house getting off paper.', 'សម្រាប់ផ្ទះជួលតូចៗ ដែលចង់ឈប់ប្រើក្រដាស។'), [L('1 building', 'អគារ ១'), L('Meter photos & billing', 'រូបថតកុងទ័រ និងវិក្កយបត្រ'), L('Telegram bills', 'វិក្កយបត្រតាម Telegram'), L('KHQR payments', 'ការបង់តាម KHQR')], L('Start free', 'ចាប់ផ្តើមឥតគិតថ្លៃ'), false),
-        plan('Pro', yearly ? '$0.80' : '$1', L('per room / month', 'ក្នុងមួយបន្ទប់ / ខែ'), L('For owners with one or more full buildings.', 'សម្រាប់ម្ចាស់អគារមួយ ឬច្រើន។'), [L('Unlimited buildings', 'អគារមិនកំណត់'), L('Staff app with OCR', 'កម្មវិធីបុគ្គលិកអានលេខស្វ័យប្រវត្តិ'), L('Parking & services', 'ចំណត និងសេវា'), L('Free rooms shown to renters', 'បន្ទប់ទំនេរបង្ហាញដល់អ្នកជួល'), L('Reports & exports', 'របាយការណ៍ និងការនាំចេញ')], L('Book a demo', 'កក់ការបង្ហាញ'), true),
+        plan('Pro', yearly ? '$0.80' : '$1', L('per room / month', 'ក្នុងមួយបន្ទប់ / ខែ'), L('For owners with one or more full buildings.', 'សម្រាប់ម្ចាស់អគារមួយ ឬច្រើន។'), [L('Unlimited buildings', 'អគារមិនកំណត់'), L('Meter photos read automatically', 'អានលេខពីរូបថតកុងទ័រដោយស្វ័យប្រវត្តិ'), L('Owner phone app', 'កម្មវិធីទូរស័ព្ទសម្រាប់ម្ចាស់ផ្ទះ'), L('Parking & services', 'ចំណត និងសេវា'), L('Free rooms shown to renters', 'បន្ទប់ទំនេរបង្ហាញដល់អ្នកជួល'), L('Reports & exports', 'របាយការណ៍ និងការនាំចេញ')], L('Book a demo', 'កក់ការបង្ហាញ'), true),
         plan(L('Business', 'អាជីវកម្ម'), L('Custom', 'តាមតម្រូវការ'), L('200+ rooms', '២០០+ បន្ទប់'), L('For property companies and managers.', 'សម្រាប់ក្រុមហ៊ុនអចលនទ្រព្យ និងអ្នកគ្រប់គ្រង។'), [L('Everything in Pro', 'គ្រប់យ៉ាងក្នុង Pro'), L('Team roles & audit log', 'តួនាទីក្រុម និងកំណត់ហេតុ'), L('Data import & training', 'នាំចូលទិន្នន័យ និងបណ្តុះបណ្តាល'), L('Priority Telegram support', 'ជំនួយតាម Telegram អាទិភាព')], L('Talk to sales', 'និយាយជាមួយផ្នែកលក់'), false)
       ],
       faq: FAQ.map(function (q, i) { var on = i === openF; return { q: q[0], a: q[1], isOpen: on, open: on ? 'true' : 'false', sign: on ? '−' : '+', toggle: function () { self.setState({ faq: on ? -1 : i }); } }; }),
       footCols: [
-        { h: L('Product', 'ផលិតផល'), links: [[L('Landlord web app', 'កម្មវិធីម្ចាស់ផ្ទះ'), 'Main.dc.html'], [L('Staff meter app', 'កម្មវិធីអានកុងទ័រ'), 'StaffHome.dc.html'], [L('Tenant Telegram', 'Telegram សម្រាប់អ្នកជួល'), 'TgChat.dc.html'], [L('Bilingual invoice', 'វិក្កយបត្រពីរភាសា'), 'InvoicePDF.dc.html']] },
+        { h: L('Product', 'ផលិតផល'), links: [[L('Landlord web app', 'កម្មវិធីម្ចាស់ផ្ទះ'), 'Main.dc.html'], [L('Owner phone app', 'កម្មវិធីទូរស័ព្ទម្ចាស់ផ្ទះ'), 'OApp1Home.dc.html'], [L('Staff meter app', 'កម្មវិធីអានកុងទ័រ'), 'StaffHome.dc.html'], [L('Tenant Telegram', 'Telegram សម្រាប់អ្នកជួល'), 'TgChat.dc.html'], [L('Bilingual invoice', 'វិក្កយបត្រពីរភាសា'), 'InvoicePDF.dc.html']] },
         { h: L('Renters', 'អ្នកជួល'), links: [[L('Find a room', 'ស្វែងរកបន្ទប់'), 'PublicListing.dc.html'], [L('Guest app', 'កម្មវិធីភ្ញៀវ'), 'GApp0Welcome.dc.html']] },
-        { h: L('Contact', 'ទំនាក់ទំនង'), links: [['Telegram @roompilot', 'https://t.me/'], [L('Book a demo', 'កក់ការបង្ហាញ'), '#top'], [L('Sign in', 'ចូល'), 'SignIn.dc.html']] }
+        { h: L('Contact', 'ទំនាក់ទំនង'), links: [['Telegram @nestvo', 'https://t.me/'], [L('Book a demo', 'កក់ការបង្ហាញ'), '#top'], [L('Sign in', 'ចូល'), 'SignIn.dc.html']] }
       ].map(function (c) { return { h: c.h, links: c.links.map(function (l) { return { l: l[0], href: l[1] }; }) }; }),
       demoOpen: !!st.demo,
       openDemo: function () { self.setState({ demo: true, dStep: 'form' }); },
